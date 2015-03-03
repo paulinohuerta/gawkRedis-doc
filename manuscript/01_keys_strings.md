@@ -93,6 +93,7 @@ _**Description**_: Authenticate the connection using a password.
 
 ##### *Return value*    
 `1` if the connection is authenticated, `null string` (empty string) otherwise.    
+
 ##### *Example*    
     ret=redis_auth(c,"fooXX")
     if(ret) {
@@ -117,7 +118,7 @@ _**Description**_: Change the selected database for the current connection.
     redis_select(c,5)
 
 ### close, disconnect
------
+
 _**Description**_: Disconnects from the Redis instance.
 
 ##### *Parameters*
@@ -133,7 +134,7 @@ _**Description**_: Disconnects from the Redis instance.
     }
 
 ### ping
------
+
 _**Description**_: Check the current connection status
 
 ##### *Parameters*
@@ -142,9 +143,8 @@ _**Description**_: Check the current connection status
 ##### *Return value*
 *string*: `PONG` on success.
 
-
 ### echo
------
+
 _**Description**_: Sends a string to Redis, which replies with the same string
 
 ##### *Parameters*
