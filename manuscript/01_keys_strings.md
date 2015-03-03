@@ -71,10 +71,12 @@ which must run with:
 _**Description**_: Connects to a Redis instance.    
 
 ##### *Parameters*    
+
 *host*: string, optional  
 *port*: number, optional    
 
 ##### *Return value*    
+
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
@@ -88,10 +90,12 @@ _**Description**_: Connects to a Redis instance.
 _**Description**_: Authenticate the connection using a password.   
 
 ##### *Parameters*   
+
 *number*: connection    
 *string*: password    
 
 ##### *Return value*    
+
 `1` if the connection is authenticated, `null string` (empty string) otherwise.    
 
 ##### *Example*    
@@ -108,9 +112,11 @@ _**Description**_: Authenticate the connection using a password.
 _**Description**_: Change the selected database for the current connection.
 
 ##### *Parameters*
+
 *number*: dbindex, the database number to switch to
 
 ##### *Return value*
+
 `1` in case of success, `-1` in case of failure.
 
 ##### *Example*
@@ -122,9 +128,11 @@ _**Description**_: Change the selected database for the current connection.
 _**Description**_: Disconnects from the Redis instance.
 
 ##### *Parameters*
+
 *number*: connection handle  
 
 ##### *Return value*
+
 `1` on success, `-1` on error.
 
 ##### *Example*
@@ -134,13 +142,14 @@ _**Description**_: Disconnects from the Redis instance.
     }
 
 ### ping
-
 _**Description**_: Check the current connection status
 
 ##### *Parameters*
+
 *number*: connection handle  
 
 ##### *Return value*
+
 *string*: `PONG` on success.
 
 ### echo
@@ -148,10 +157,12 @@ _**Description**_: Check the current connection status
 _**Description**_: Sends a string to Redis, which replies with the same string
 
 ##### *Parameters*
+
 *number*: connection
 *string*: The message to send.
 
 ##### *Return value*
+
 *string*: the same message.
 
 
@@ -200,14 +211,15 @@ _**Description**_: Sends a string to Redis, which replies with the same string
 -----
 
 ### get
------
 _**Description**_: Get the value related to the specified key
 
 ##### *Parameters*
+
 *number*: connection  
 *string*: the key
 
 ##### *Return value*
+
 *string*: `key value` or `null string` (empty string) if key didn't exist.
 
 ##### *Example*
