@@ -79,14 +79,14 @@ _**Description**_: Connects to a Redis instance.
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
-~~~ awk
+{lang="AWK"}
     c=redis_connect('127.0.0.1', 6379)
-    c=redis_connect('127.0.0.1') # port 6379 by default
+    # port 6379 by default
+    c=redis_connect('127.0.0.1')
     # host address 127.0.0.1 and port 6379 by default
     c=redis_connect()
     a=length($0)
     b=substring($1,3)
-~~~
 
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
@@ -98,7 +98,7 @@ _**Description**_: Authenticate the connection using a password.
 ##### *Return value*    
 `1` if the connection is authenticated, `null string` (empty string) otherwise.   
 ##### *Example*    
-{lang="Awk"}
+{lang="awk"}
     ret=redis_auth(c,"fooXX");
     if(ret) {
       # authenticated
