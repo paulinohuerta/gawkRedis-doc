@@ -98,7 +98,6 @@ _**Description**_: Authenticate the connection using a password.
 ##### *Return value*    
 `1` if the connection is authenticated, `null string` (empty string) otherwise.   
 ##### *Example*    
-{lang="awk"}
     ret=redis_auth(c,"fooXX");
     if(ret) {
       # authenticated
@@ -132,7 +131,6 @@ _**Description**_: Disconnects from the Redis instance.
 `1` on success, `-1` on error.
 
 ##### *Example*
-{:lang="awk"}
     ret=redis_close(c)
     if(ret==-1) {
       print ERRNO
