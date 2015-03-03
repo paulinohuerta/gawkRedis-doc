@@ -20,7 +20,7 @@ Everything you should need to install gawk-redis on your system.
 
  You can try running the following gawk script, *myscript.awk*, which uses the extension:
 
-    :::awk
+{:lang="awk"}
     @load "redis"
     BEGIN{
       c=redis_connect() # the connection with the server: 127.0.0.1:6379
@@ -40,9 +40,21 @@ which must run with:
     /path-to-gawk/gawk -f myscript.awk /dev/null
 
 
-# Functions
+# The API Functions
 
-## Connection
+* [Connection](#connection)
+* [Keys and strings](#keys-and-strings)
+* [Hashes](#hashes)
+* [Lists](#lists)
+* [Sets](#sets)
+* [Sorted sets](#sorted-sets)
+* [Pub/sub](#pubsub) 
+* [Pipelining](#pipelining)
+* [Scripting](#scripting)
+* [Server](#server)  
+* [Transactions](#transactions)
+
+# Connection Functions
 
 1. [connect](#connect) - Connect to a Redis server
 1. [auth](#auth) - Authenticate to the server
@@ -52,36 +64,27 @@ which must run with:
 1. [echo](#echo) - Echo the given string
 
 ### connect
------
 _**Description**_: Connects to a Redis instance.
-
-##### *Parameters*
-
+##### *Parameters*    
 *host*: string, optional  
 *port*: number, optional  
+##### *Return value*    
+*connection handle*: number, `-1` on error.    
+##### *Example*    
+{:lang="awk"}
+    c=redis_connect('127.0.0.1', 6379)
+    c=redis_connect('127.0.0.1') # port 6379 by default
+    c=redis_connect() # host address 127.0.0.1 and port 6379 by default
 
-##### *Return value*
-*connection handle*: number, `-1` on error.
-
-##### *Example*
-    :::awk
-    c=redis_connect('127.0.0.1', 6379);
-    c=redis_connect('127.0.0.1'); // port 6379 by default
-    c=redis_connect(); // host address 127.0.0.1 and port 6379 by default
-
-### auth
------
-_**Description**_: Authenticate the connection using a password.
-
-##### *Parameters*
-*number*: connection  
-*string*: password
-
-##### *Return value*
-`1` if the connection is authenticated, `null string` (empty string) otherwise.
-
-##### *Example*
-    :::awk
+### auth    
+_**Description**_: Authenticate the connection using a password.   
+##### *Parameters*   
+*number*: connection    
+*string*: password    
+##### *Return value*    
+`1` if the connection is authenticated, `null string` (empty string) otherwise.   
+##### *Example*    
+{:lang="awk"}
     ret=redis_auth(c,"fooXX");
     if(ret) {
       # authenticated
@@ -101,7 +104,7 @@ _**Description**_: Change the selected database for the current connection.
 `1` in case of success, `-1` in case of failure.
 
 ##### *Example*
-    :::awk
+{:lang="awk"}
     redis_select(c,5)
 
 ### close, disconnect
@@ -115,7 +118,7 @@ _**Description**_: Disconnects from the Redis instance.
 `1` on success, `-1` on error.
 
 ##### *Example*
-    :::awk
+{:lang="awk"}
     ret=redis_close(c)
     if(ret==-1) {
       print ERRNO
@@ -199,8 +202,8 @@ _**Description**_: Get the value related to the specified key
 ##### *Return value*
 *string*: `key value` or `null string` (empty string) if key didn't exist.
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     value=redis_get(c,"key1")
 
 ### set
@@ -216,8 +219,8 @@ _**Description**_: Set the string value in argument as value of the key.  If you
 ##### *Return value*
 `1` if the command is successful `string null` if no success, or `-1` on error.
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     # Simple key -> value set
     redis_set(c,"key","value");
 
@@ -241,8 +244,8 @@ _**Description**_: Remove specified keys.
 ##### *Return value*
 *number*: Number of keys deleted.
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     redis_set(c,"keyX","valX")
     redis_set(c,"keyY","valY")
     redis_set(c,"keyZ","valZ")
@@ -264,8 +267,8 @@ _**Description**_: Verify if the specified key exists.
 ##### *Return value*
 `1` If the key exists, `0` if the key no exists.
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     redis_set(c,"key","value");
     redis_exists(c,"key"); # return 1
     redis_exists(c,"NonExistingKey") # return 0
@@ -282,8 +285,8 @@ _**Description**_: Increment the number stored at key by one. If the second argu
 ##### *Return value*
 *number*: the new value
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     redis_incr(c,"key1") # key1 didn't exists, set to 0 before the increment
                    # and now has the value 1
     redis_incr(c,"key1") #  value 2
@@ -303,8 +306,8 @@ _**Description**_: Increment the key with floating point precision.
 ##### *Return value*
 *number*: the new value
 
-##### *Examples*
-    :::awk
+##### *Example*
+{:lang="awk"}
     redis_incrbyfloat(c,"key1", 1.5)  # key1 didn't exist, so it will now be 1.5
     redis_incrbyfloat(c,"key1", 1.5)  # 3
     redis_incrbyfloat(c,"key1", -1.5) # 1.5
