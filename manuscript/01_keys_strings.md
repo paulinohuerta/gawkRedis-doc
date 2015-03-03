@@ -20,7 +20,7 @@ Everything you should need to install gawk-redis on your system.
 
  You can try running the following gawk script, *myscript.awk*, which uses the extension:
 
-{:lang="awk"}
+{lang="AWK"}
     @load "redis"
     BEGIN{
       # the connection with the server: 127.0.0.1:6379
@@ -70,6 +70,7 @@ which must run with:
 
 ### connect     
 _**Description**_: Connects to a Redis instance.    
+
 ##### *Parameters*    
 *host*: string, optional  
 *port*: number, optional    
@@ -78,11 +79,14 @@ _**Description**_: Connects to a Redis instance.
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
-{:lang="awk"}
+~~~ awk
     c=redis_connect('127.0.0.1', 6379)
     c=redis_connect('127.0.0.1') # port 6379 by default
     # host address 127.0.0.1 and port 6379 by default
     c=redis_connect()
+    a=length($0)
+    b=substring($1,3)
+~~~
 
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
@@ -94,7 +98,7 @@ _**Description**_: Authenticate the connection using a password.
 ##### *Return value*    
 `1` if the connection is authenticated, `null string` (empty string) otherwise.   
 ##### *Example*    
-{:lang="awk"}
+{lang="Awk"}
     ret=redis_auth(c,"fooXX");
     if(ret) {
       # authenticated
