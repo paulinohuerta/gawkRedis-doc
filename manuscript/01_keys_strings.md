@@ -23,15 +23,20 @@ Everything you should need to install gawk-redis on your system.
 {:lang="awk"}
     @load "redis"
     BEGIN{
-      c=redis_connect() # the connection with the server: 127.0.0.1:6379
+      # the connection with the server: 127.0.0.1:6379
+      c=redis_connect()
       if(c==-1) {
-        print ERRNO # always you can to use the ERRNO variable for checking
+        # always you can to use the ERRNO var for checking
+        print ERRNO
       }
-      ret=redis_select(c,4) # the select redis command; it is assumed that it contains data
+      # the select redis command
+      ret=redis_select(c,4) 
+      # The above statement assumes that db 4 contains data
       print "select returns "ret
       pong=redis_ping(c) # the ping redis command
       print "The server says: "pong
-      print redis_echo(c,"foobared") # the echo redis command
+       # the echo redis command
+      print redis_echo(c,"foobared")
       redis_close(c)
     }
 
@@ -63,24 +68,29 @@ which must run with:
 1. [ping](#ping) - Ping the server
 1. [echo](#echo) - Echo the given string
 
-### connect
-_**Description**_: Connects to a Redis instance.
+### connect     
+_**Description**_: Connects to a Redis instance.    
 ##### *Parameters*    
 *host*: string, optional  
-*port*: number, optional  
+*port*: number, optional    
+
 ##### *Return value*    
-*connection handle*: number, `-1` on error.    
+*connection handle*: number, `-1` on error.
+
 ##### *Example*    
 {:lang="awk"}
     c=redis_connect('127.0.0.1', 6379)
     c=redis_connect('127.0.0.1') # port 6379 by default
-    c=redis_connect() # host address 127.0.0.1 and port 6379 by default
+    # host address 127.0.0.1 and port 6379 by default
+    c=redis_connect()
 
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
+
 ##### *Parameters*   
 *number*: connection    
 *string*: password    
+
 ##### *Return value*    
 `1` if the connection is authenticated, `null string` (empty string) otherwise.   
 ##### *Example*    
@@ -94,7 +104,7 @@ _**Description**_: Authenticate the connection using a password.
     }
 
 ### select
------
+
 _**Description**_: Change the selected database for the current connection.
 
 ##### *Parameters*
