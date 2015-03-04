@@ -68,14 +68,14 @@ which must run with:
 1. [echo](#echo) - Echo the given string
 
 ### connect     
-_**Description**_: Connects to a Redis instance.    
+*Description*: Connects to a Redis instance.    
 
-##### *Parameters*    
+##### Parameters 
 
 *host*: string, optional  
 *port*: number, optional    
 
-##### *Return value*    
+##### Return value 
 
 *connection handle*: number, `-1` on error.
 
@@ -89,12 +89,12 @@ _**Description**_: Connects to a Redis instance.
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
 
-##### *Parameters*   
+##### *Parameters*
 
 *number*: connection    
 *string*: password    
 
-##### *Return value*    
+##### *Return value* 
 
 `1` if the connection is authenticated, `null string` (empty string) otherwise.    
 
