@@ -1,23 +1,23 @@
 # Keys
 
-* [del](#del) - Delete a key
+1. [del](#del) - Delete a key
 * [dump](#dump) - Return a serialized version of the value stored at the specified key.
-* [exists](#exists) - Determine if a key exists
-* [expire, pexpire](#expire-pexpire) - Set a key's time to live in seconds
-* [keys](#keys) - Find all keys matching the given pattern
-* [move](#move) - Move a key to another database
-* [persist](#persist) - Remove the expiration from a key
-* [randomkey](#randomkey) - Return a random key from the keyspace
-* [rename](#rename) - Rename a key
-* [renamenx](#renamenx) - Rename a key, only if the new key does not exist
-* [sort](#sort) - Sort the elements in a list, set or sorted set
-* [sortLimit](#sortlimit) - Sort the elements in a list, set or sorted set, using the LIMIT modifier
-* [sortLimitStore](#sortlimitstore) - Sort the elements in a list, set or sorted set, using the LIMIT and STORE modifiers
-* [sortStore](#sortstore) - Sort the elements in a list, set or sorted set, using the STORE modifier
-* [scan](#scan) - iterates the set of keys in the currently selected Redis db
-* [type](#type) - Determine the type stored at key
-* [ttl, pttl](#ttl-pttl) - Get the time to live for a key
-* [restore](#restore) - Create a key using the provided serialized value, previously obtained with [dump](#dump).
+1. [exists](#exists) - Determine if a key exists
+1. [expire, pexpire](#expire-pexpire) - Set a key's time to live in seconds
+1. [keys](#keys) - Find all keys matching the given pattern
+1. [move](#move) - Move a key to another database
+1. [persist](#persist) - Remove the expiration from a key
+1. [randomkey](#randomkey) - Return a random key from the keyspace
+1. [rename](#rename) - Rename a key
+1. [renamenx](#renamenx) - Rename a key, only if the new key does not exist
+1. [sort](#sort) - Sort the elements in a list, set or sorted set
+1. [sortLimit](#sortlimit) - Sort the elements in a list, set or sorted set, using the LIMIT modifier
+1. [sortLimitStore](#sortlimitstore) - Sort the elements in a list, set or sorted set, using the LIMIT and STORE modifiers
+1. [sortStore](#sortstore) - Sort the elements in a list, set or sorted set, using the STORE modifier
+1. [scan](#scan) - iterates the set of keys in the currently selected Redis db
+1. [type](#type) - Determine the type stored at key
+1. [ttl, pttl](#ttl-pttl) - Get the time to live for a key
+1. [restore](#restore) - Create a key using the provided serialized value, previously obtained with [dump](#dump).
 
 -----
 
@@ -31,7 +31,7 @@ _**Description**_: Remove specified keys.
 *number*: Number of keys deleted.
 
 ##### *Example*
-{:lang="awk"}
+{lang=awk,line-numbers=off}
     redis_set(c,"keyX","valX")
     redis_set(c,"keyY","valY")
     redis_set(c,"keyZ","valZ")
