@@ -17,7 +17,7 @@ Everything you should need to install gawk-redis on your system.
 * Interested in release candidates or unstable versions? [check the repository](https://sourceforge.net/u/paulinohuerta/gawkextlib_d/ci/master/tree/)
 
  You can try running the following gawk script, *myscript.awk*, which uses the extension:
-{line-numbers=off,lang=text}
+{line-numbers=off,lang=awk}
     @load "redis"
     BEGIN{
       # the connection with the server: 127.0.0.1:6379

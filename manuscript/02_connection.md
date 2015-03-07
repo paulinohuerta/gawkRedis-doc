@@ -10,10 +10,10 @@
 ### connect     
 _**Description**_: Connects to a Redis instance.    
 
-_**Parameters**_   
+_**Parameters**_   \
 *host*: string, optional  
 *port*: number, optional    
-_**Return value**_     
+_**Return value**_     \
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
