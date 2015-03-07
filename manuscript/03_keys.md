@@ -28,10 +28,9 @@ _**Description**_: Remove specified keys.
 *string or array of string*: `key name` or `array name` containing the names of the keys
 
 ##### *Return value*
-*number*: Number of keys deleted.
+*number*: Number of keys deleted.  
 
-##### *Example*
-{title="Example 1: Using del",lang=awk,line-numbers=off}
+{title="Example: Using del",lang=text}
     redis_set(c,"keyX","valX")
     redis_set(c,"keyY","valY")
     redis_set(c,"keyZ","valZ")
