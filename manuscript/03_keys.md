@@ -80,11 +80,11 @@ _**Return value**_
 `1` if key was moved, `0` if key was not moved.
 
 {title="Example: Using move",lang=text,linenos=off}
-    redis_select(c,0)	# switch to DB 0
+    redis_select(c,0)	  # switch to DB 0
     redis_set(c,"x","42") # write 42 to x
-    redis_move(c,"x", 1) # move to DB 1
-    redis_select(c,1)	# switch to DB 1
-    redis_get(c,"x");	# will return 42
+    redis_move(c,"x", 1)  # move to DB 1
+    redis_select(c,1)	  # switch to DB 1
+    redis_get(c,"x");	  # will return 42
 
 ### rename
 _**Description**_: Renames a key. If newkey already exists it is overwritten.
@@ -101,7 +101,8 @@ _**Return value**_
     redis_set(c,"x", "valx");
     redis_rename(c,"x","y");
     redis_get(c,"y")  # return "valx"
-    redis_get(c,"x")  # return null string, because x no longer exists
+    redis_get(c,"x")  # return null string, because x 
+                      # no longer exists
 
 ### renamenx
 _**Description**_: Same as rename, but will not replace a key if the destination already exists. This is the same behaviour as set and option nx.
@@ -121,28 +122,29 @@ _**Return value**_
 `1` in case of success, `0` if key does not exist or the timeout could not be set
 
 {title="Example: Using expire",lang=text,linenos=off}
-    ret=redis_set(c,"x", "42")  # ret value 1; x value "42"
-    redis_expire(c,"x", 3)      # x will disappear in 3 seconds.
-    system("sleep 5")     # wait 5 seconds
-    redis_get(c,"x")  # will return null string, as x has expired.
+    ret=redis_set(c,"x", "42") # ret value 1; x value "42"
+    redis_expire(c,"x", 3) # x will disappear in 3 seconds
+    system("sleep 5") # wait 5 seconds
+    redis_get(c,"x") # will return null string,
+                     # as x has expired
 
 ### keys
 _**Description**_: Returns the keys that match a certain pattern. Check supported [glob-style patterns](http://redis.io/commands/keys)
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: pattern  
 *array of strings*: the results, the keys that match a certain pattern.
 
-##### *Return value*
+_**Return value**_    
 `1` in case of success, `-1` on error
 
-##### *Example*
-{:lang="awk"}
-    redis_keys(c,"*",AR)    # all keys will match this.
-    # show AR contains
+{title="Example: Using keys",lang=text,linenos=off}
+    redis_keys(c,"*",AR)   # all keys will match this
     delete AR
-    redis_keys(c,"user*",AR)  # for matching all keys begining with "user"
+    # for matching all keys begining with "user"
+    redis_keys(c,"user*",AR) 
+    # show AR contains
     for(i in AR) {
       print i": "AR[i]
     }
@@ -150,15 +152,14 @@ _**Description**_: Returns the keys that match a certain pattern. Check supporte
 ### type
 _**Description**_: Returns the type of data pointed by a given key.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
+_**Return value**_    
 *string*: the type of the data (string, list, set, zset and hash) or `none` when the key does not exist.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using type",lang=text,linenos=off}
     redis_set(c,"keyZ","valZ")
     ret=redis_type(c,"keyZ") # ret contains "string"
     # showing the "type" all keys of DB 4
@@ -169,20 +170,18 @@ _**Description**_: Returns the type of data pointed by a given key.
     } 
 
 ### sort
------
 _**Description**_: Sort the elements in a list, set or sorted set.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 *array*: the array with the result  
 *optional string*: options "desc|asc alpha"
 
-##### *Return value*
+_**Return value**_    
 `1` or `-1`on error 
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using sort",lang=text,linenos=off}
     c=redis_connect()
     redis_del(c,"thelist1");
     print redis_type(c,"thelist1") # none
@@ -207,7 +206,7 @@ _**Description**_: Sort the elements in a list, set or sorted set.
 ### sortLimit
 _**Description**_: Sort the elements in a list, set or sorted set, using the LIMIT modifier with the sense of limit the number of returned elements.
 
-##### *Parameters*
+_**Parameters**_     
 *number*: connection  
 *string*: key name  
 *array*: the array with the result 
@@ -215,16 +214,18 @@ _**Description**_: Sort the elements in a list, set or sorted set, using the LIM
 *number*: count
 *optional string*: options "desc|asc alpha"
 
-##### *Return value*
+_**Return value**_    
 `1` or `-1`on error 
 
-##### *Example*
-{:lang="awk"}
-    #  will return 5 elements of the sorted version of list2, starting at element 0
+{title="Example: Using type",lang=text,linenos=off}
+    # will return 5 elements of the sorted version of
+    #   list2, starting at element 0
     c=redis_connect()
-    ret=redis_sortLimit(c,"list2",AR,0,5) # assume "list2" with numerical content
-     # or using a sixth argument
-     # ret=redis_sortLimit(c,"list2",AR,0,5,"desc") for Alphanumeric content should use "alpha"
+    # assume "list2" with numerical content
+    ret=redis_sortLimit(c,"list2",AR,0,5)
+    # or using a sixth argument
+    # ret=redis_sortLimit(c,"list2",AR,0,5,"desc") 
+    #   for Alphanumeric content should use "alpha"
     if(ret==-1) {
       print ERRNO
     }
