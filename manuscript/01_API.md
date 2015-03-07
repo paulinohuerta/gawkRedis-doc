@@ -1,5 +1,7 @@
 # gawk-redis
 
+![gawk-redis](images/awkRedis.png){:center=""}
+
 A [GAWK](https://www.gnu.org/software/gawk/) (the GNU implementation of the AWK Programming Language) client library for Redis.
 
 The gawk-redis is an extension library that enables GAWK , to process data from a [Redis server](http://redis.io/), then provides an API for communicating with the Redis key-value store, using [hiredis](https://github.com/redis/hiredis), a C client for Redis.
