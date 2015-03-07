@@ -17,26 +17,26 @@ Everything you should need to install gawk-redis on your system.
 * Interested in release candidates or unstable versions? [check the repository](https://sourceforge.net/u/paulinohuerta/gawkextlib_d/ci/master/tree/)
 
  You can try running the following gawk script, *myscript.awk*, which uses the extension:
-~~~~~~~~
-@load "redis"
-BEGIN{
-  # the connection with the server: 127.0.0.1:6379
-  c=redis_connect()
-  if(c==-1) {
-    # always you can to use the ERRNO var for checking
-    print ERRNO
-  }
-  # the select redis command
-  ret=redis_select(c,4) 
-  # The above statement assumes that db 4 contains data
-  print "select returns "ret
-  pong=redis_ping(c) # the ping redis command
-  print "The server says: "pong
-  # the echo redis command
-  print redis_echo(c,"foobared")
-  redis_close(c)
-}
-~~~~~~~~
+{lang=awk,line-numbers=off}
+    @load "redis"
+    BEGIN{
+      # the connection with the server: 127.0.0.1:6379
+      c=redis_connect()
+      if(c==-1) {
+        # always you can to use the ERRNO var for checking
+        print ERRNO
+      }
+      # the select redis command
+      ret=redis_select(c,4) 
+      # The above statement assumes that db 4 contains data
+      print "select returns "ret
+      pong=redis_ping(c) # the ping redis command
+      print "The server says: "pong
+      # the echo redis command
+      print redis_echo(c,"foobared")
+      redis_close(c)
+    }
+
 which must run with:
 
 `/path-to-gawk/gawk -f myscript.awk /dev/null`

@@ -13,6 +13,7 @@ _**Description**_: Connects to a Redis instance.
 _**Parameters**_   
 *host*: string, optional  
 *port*: number, optional    
+
 _**Return value**_     
 *connection handle*: number, `-1` on error.
 
@@ -27,14 +28,14 @@ _**Return value**_
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
 
-##### *Parameters*
+_**Parameters**_
 *number*: connection    
 *string*: password    
 
-##### *Return value* 
+_**Return value**_   
 `1` if the connection is authenticated, `null string` (empty string) otherwise.    
 ##### *Example*    
-{:lang="awk"}
+{lang=text,line-numbers=off}
     ret=redis_auth(c,"fooXX")
     if(ret) {
       # authenticated
