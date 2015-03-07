@@ -8,19 +8,19 @@
 1. [echo](#echo) - Echo the given string
 
 ### connect     
-*Description*: Connects to a Redis instance.    
-
-#### Parameters    
-
+_*Description*_: Connects to a Redis instance.    
+\
+*Parameters*        
+\
 *host*: string, optional  
 *port*: number, optional    
-
-#### Return value     
-
+\
+*Return value*     
+\
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
-{:lang="awk"}
+{lang=awk,line-numbers=off}
     c=redis_connect('127.0.0.1', 6379)
     # port 6379 by default
     c=redis_connect('127.0.0.1')
