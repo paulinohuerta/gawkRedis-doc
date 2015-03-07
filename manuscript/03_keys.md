@@ -30,7 +30,7 @@ _**Description**_: Remove specified keys.
 ##### *Return value*
 *number*: Number of keys deleted.  
 
-{title="Example: Using del",lang=text}
+{title="Example: Using del",lang=text,linenos=off}
     redis_set(c,"keyX","valX")
     redis_set(c,"keyY","valY")
     redis_set(c,"keyZ","valZ")
