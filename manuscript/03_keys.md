@@ -31,7 +31,7 @@ _**Description**_: Remove specified keys.
 *number*: Number of keys deleted.
 
 ##### *Example*
-{lang=awk,line-numbers=off}
+{title="Example 1: Using del",lang=awk,line-numbers=off}
     redis_set(c,"keyX","valX")
     redis_set(c,"keyY","valY")
     redis_set(c,"keyZ","valZ")
