@@ -17,8 +17,7 @@ _**Parameters**_
 _**Return value**_     
 *connection handle*: number, `-1` on error.
 
-##### *Example*    
-{lang=awk,line-numbers=off}
+{title="Example: Using connect",lang=text,linenos=off}
     c=redis_connect('127.0.0.1', 6379)
     # port 6379 by default
     c=redis_connect('127.0.0.1')
@@ -35,8 +34,7 @@ _**Parameters**_
 _**Return value**_   
 `1` if the connection is authenticated, `null string` (empty string) otherwise.
 
-##### *Example*    
-{lang=awk,line-numbers=off}
+{title="Example: Using auth",lang=text,linenos=off}
     ret=redis_auth(c,"fooXX")
     if(ret) {
       # authenticated
@@ -54,8 +52,7 @@ _**Parameters**_
 _**Return value**_    
 `1` in case of success, `-1` in case of failure.
 
-##### *Example*
-{lang=awk,line-numbers=off}
+{title="Example: Using select",lang=text,linenos=off}
     redis_select(c,5)
 
 ### close, disconnect
@@ -67,8 +64,7 @@ _**Parameters**_
 _**Return value**_   
 `1` on success, `-1` on error.
 
-##### *Example*
-{lang=awk,line-numbers=off}
+{title="Example: Using close",lang=text,linenos=off}
     ret=redis_close(c)
     if(ret==-1) {
       print ERRNO

@@ -18,7 +18,7 @@ Everything you should need to install gawk-redis on your system.
 
  You can try running the following gawk script, *myscript.awk*, which uses the extension:
 
-{lang=awk,line-numbers=off}
+{title="Example: Using gawk-redis extension",lang=text,linenos=off}
     @load "redis"
     BEGIN{
       # the connection with the server: 127.0.0.1:6379

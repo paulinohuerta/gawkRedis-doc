@@ -1,4 +1,4 @@
-# Keys
+# Keys Functions
 
 1. [del](#del) - Delete a key
 * [dump](#dump) - Return a serialized version of the value stored at the specified key.
@@ -24,10 +24,10 @@
 ### del
 _**Description**_: Remove specified keys.
 
-##### *Parameters*  
+_**Parameters**_  
 *string or array of string*: `key name` or `array name` containing the names of the keys
 
-##### *Return value*  
+_**Return value**_    
 *number*: Number of keys deleted.  
 
 {title="Example: Using del",lang=text,linenos=off}
@@ -44,11 +44,11 @@ _**Description**_: Remove specified keys.
 ### exists
 _**Description**_: Verify if the specified key exists.
 
-##### *Parameters*  
+_**Parameters**_     
 *number*: connection  
 *string*: key name
 
-##### *Return value*  
+_**Return value**_    
 `1` If the key exists, `0` if the key no exists.
 
 {title="Example: Using exists",lang=text,linenos=off}
@@ -59,29 +59,27 @@ _**Description**_: Verify if the specified key exists.
 ### randomKey
 _**Description**_: Returns a random key.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 
-##### *Return value*
+_**Return value**_    
 *string*: a random key from the currently selected database
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using randomKey",lang=text,linenos=off}
     print redis_randomkey(c)
 
 ### move
 _**Description**_: Moves a key to a different database. The key will move only if not exists in destination database.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
-*string*: key, the key to move  
+*string*: key, the key to move   
 *number*: dbindex, the database number to move the key to  
 
-##### *Return value*
+_**Return value**_   
 `1` if key was moved, `0` if key was not moved.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using move",lang=text,linenos=off}
     redis_select(c,0)	# switch to DB 0
     redis_set(c,"x","42") # write 42 to x
     redis_move(c,"x", 1) # move to DB 1
@@ -91,16 +89,15 @@ _**Description**_: Moves a key to a different database. The key will move only i
 ### rename
 _**Description**_: Renames a key. If newkey already exists it is overwritten.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
-*string*: srckey, the key to rename.  
-*string*: dstkey, the new name for the key.
+*string*: srckey, the key to rename.   
+*string*: dstkey, the new name for the key.  
 
-##### *Return value*
+_**Return value**_    
 `1` in case of success, `-1` in case of error.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using rename",lang=text,linenos=off}
     redis_set(c,"x", "valx");
     redis_rename(c,"x","y");
     redis_get(c,"y")  # return "valx"
@@ -109,21 +106,21 @@ _**Description**_: Renames a key. If newkey already exists it is overwritten.
 ### renamenx
 _**Description**_: Same as rename, but will not replace a key if the destination already exists. This is the same behaviour as set and option nx.
 
-##### *Return value*
+_**Return value**_     
 `1` in case of success, `0` in case not success.
 
 ### expire, pexpire
 _**Description**_: Sets an expiration date (a timeout) on an item. pexpire requires a TTL in milliseconds.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name. The key that will disappear.  
 *number*: ttl. The key's remaining Time To Live, in seconds.
 
-##### *Return value*
+_**Return value**_    
 `1` in case of success, `0` if key does not exist or the timeout could not be set
-##### *Example*
-{:lang="awk"}
+
+{title="Example: Using expire",lang=text,linenos=off}
     ret=redis_set(c,"x", "42")  # ret value 1; x value "42"
     redis_expire(c,"x", 3)      # x will disappear in 3 seconds.
     system("sleep 5")     # wait 5 seconds
