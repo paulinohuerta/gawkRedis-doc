@@ -73,7 +73,7 @@ _**Return value**_
 ### ping
 _**Description**_: Check the current connection status   
 
-_**Parameters**_   
+_**Parameters**_    
 *number*: connection handle  
 
 _**Return value**_  
@@ -81,7 +81,7 @@ _**Return value**_
 
 ### echo
 _**Description**_: Sends a string to Redis, which replies with the same string   
-_**Parameters**_
+_**Parameters**_    
 *number*: connection  
 *string*: The message to send.  
 
