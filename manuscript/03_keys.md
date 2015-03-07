@@ -24,10 +24,10 @@
 ### del
 _**Description**_: Remove specified keys.
 
-##### *Parameters*
+##### *Parameters*  
 *string or array of string*: `key name` or `array name` containing the names of the keys
 
-##### *Return value*
+##### *Return value*  
 *number*: Number of keys deleted.  
 
 {title="Example: Using del",lang=text,linenos=off}
@@ -44,15 +44,14 @@ _**Description**_: Remove specified keys.
 ### exists
 _**Description**_: Verify if the specified key exists.
 
-##### *Parameters*
+##### *Parameters*  
 *number*: connection  
 *string*: key name
 
-##### *Return value*
+##### *Return value*  
 `1` If the key exists, `0` if the key no exists.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using exists",lang=text,linenos=off}
     redis_set(c,"key","value");
     redis_exists(c,"key"); # return 1
     redis_exists(c,"NonExistingKey") # return 0
