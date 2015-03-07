@@ -8,15 +8,12 @@
 1. [echo](#echo) - Echo the given string
 
 ### connect     
-_*Description*_: Connects to a Redis instance.    
-\
-*Parameters*        
-\
+_**Description**_: Connects to a Redis instance.    
+
+_**Parameters**_   
 *host*: string, optional  
 *port*: number, optional    
-\
-*Return value*     
-\
+_**Return value**_     
 *connection handle*: number, `-1` on error.
 
 ##### *Example*    
