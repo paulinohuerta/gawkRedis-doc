@@ -35,7 +35,7 @@ _**Parameters**_
 _**Return value**_   
 `1` if the connection is authenticated, `null string` (empty string) otherwise.    
 ##### *Example*    
-{lang=text,line-numbers=off}
+{lang=awk,line-numbers=off}
     ret=redis_auth(c,"fooXX")
     if(ret) {
       # authenticated
