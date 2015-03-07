@@ -28,12 +28,13 @@ _**Return value**_
 ### auth    
 _**Description**_: Authenticate the connection using a password.   
 
-_**Parameters**_
+_**Parameters**_   
 *number*: connection    
 *string*: password    
 
 _**Return value**_   
-`1` if the connection is authenticated, `null string` (empty string) otherwise.    
+`1` if the connection is authenticated, `null string` (empty string) otherwise.
+
 ##### *Example*    
 {lang=awk,line-numbers=off}
     ret=redis_auth(c,"fooXX")
@@ -45,50 +46,49 @@ _**Return value**_
     }
 
 ### select
-_**Description**_: Change the selected database for the current connection.
+_**Description**_: Change the selected database for the current connection.  
 
-##### *Parameters*
+_**Parameters**_  
 *number*: dbindex, the database number to switch to
 
-##### *Return value*
+_**Return value**_    
 `1` in case of success, `-1` in case of failure.
 
 ##### *Example*
-{:lang="awk"}
+{lang=awk,line-numbers=off}
     redis_select(c,5)
 
 ### close, disconnect
-_**Description**_: Disconnects from the Redis instance.
+_**Description**_: Disconnects from the Redis instance.   
 
-##### *Parameters*
+_**Parameters**_  
 *number*: connection handle  
 
-##### *Return value*
+_**Return value**_   
 `1` on success, `-1` on error.
 
 ##### *Example*
-{:lang="awk"}
+{lang=awk,line-numbers=off}
     ret=redis_close(c)
     if(ret==-1) {
       print ERRNO
     }
 
 ### ping
-_**Description**_: Check the current connection status
+_**Description**_: Check the current connection status   
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection handle  
 
-##### *Return value*
-*string*: `PONG` on success.
+_**Return value**_  
+*string*: `PONG` on success.  
 
 ### echo
-_**Description**_: Sends a string to Redis, which replies with the same string
+_**Description**_: Sends a string to Redis, which replies with the same string   
+_**Parameters**_
+*number*: connection  
+*string*: The message to send.  
 
-##### *Parameters*
-*number*: connection
-*string*: The message to send.
-
-##### *Return value*
+_**Return value**_  
 *string*: the same message.
 
