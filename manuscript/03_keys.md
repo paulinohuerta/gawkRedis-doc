@@ -238,8 +238,7 @@ _**Return value**_
 ### sortLimitStore
 _**Description**_: Sort the elements in a list, set or sorted set, using the LIMIT and STORE modifiers with the sense of limit the number of returned elements and ensure that the result is stored as in a new key instead of be returned.
 
-
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 *string*: the name of the new key 
@@ -247,32 +246,31 @@ _**Description**_: Sort the elements in a list, set or sorted set, using the LIM
 *number*: count
 *otional string*: options "desc|asc alpha"
 
-##### *Return value*
+_**Return value**_   
 `1` or `-1`on error 
 
-##### *Example*
-{:lang="awk"}
-    #  will store 5 elements, of the sorted version of list2,
-    #  in the list "listb"
+{title="Example: Using sortLimitStore",lang=text,linenos=off}
+    # will store 5 elements, of the sorted version of list2
+    # in the list "listb"
     c=redis_connect()
-    ret=redis_sortLimitStore(c,"list2","listb",0,5) # assume "list2" with numerical content
-    # or using a sixth argument
-    # ret=redis_sortLimitStore(c,"list2","listb",0,5,"desc")
+    # assume "list2" with numerical content
+    ret=redis_sortLimitStore(c,"list2","listb",0,5)
+    # or using a sixth argument 
+    # redis_sortLimitStore(c,"list2","listb",0,5,"desc")
 
 ### sortStore
 _**Description**_: Sort the elements in a list, set or sorted set, using the STORE modifier for that the result to be stored in a new key
 
-##### *Parameters*
+##### *Parameters**_    
 *number*: connection  
 *string*: key name  
 *string*: the name of the new key 
 *optional string*: options "desc|asc alpha"
 
-##### *Return value*
+##### *Return value**_    
 `1` or `-1`on error 
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using sortStore",lang=text,linenos=off}
     c=redis_connect()
     redis_del(c,"list2")
     redis_lpush(c,"list2","John")
@@ -289,24 +287,24 @@ _**Description**_: Sort the elements in a list, set or sorted set, using the STO
 ### scan
 _**Description**_: iterates the set of keys. Please read how it works from Redis [scan](http://redis.io/commands/scan) command
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *number*: the cursor  
 *array*:  for to hold the results  
 *string (optional)*: for to `match` a given glob-style pattern, similarly to the behavior of the `keys` function that takes a pattern as only argument
 
-##### *Return value*
+_**Return value**_   
 `1` on success,  or `0` on the last iteration (when the returned cursor is equal 0). Returns `-1` on error. 
 
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using scan",lang=text,linenos=off}
     @load "redis"
     BEGIN{
      c=redis_connect()
      num=0
      while(1){
-       ret=redis_scan(c,num,AR,"s*") # the last parameter (the pattern "s*"), is optional
+       # the last parameter (the pattern "s*"), is optional
+       ret=redis_scan(c,num,AR,"s*") 
        if(ret==-1){
         print ERRNO
         redis_close(c)
@@ -328,35 +326,33 @@ _**Description**_: iterates the set of keys. Please read how it works from Redis
      redis_close(c)
     }
 
-
 ### ttl, pttl
 _**Description**_: Returns the time to live left for a given key in seconds (ttl), or milliseconds (pttl).
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
+_**Return value**_    
 *number*:  The time to live in seconds.  If the key has no ttl, `-1` will be returned, and `-2` if the key doesn't exist.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using ttl",lang=text,linenos=off}
     redis_ttl(c,"key")
 
 ### persist
 _**Description**_: Remove the expiration timer from a key.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
+_**Return value**_        
 `1` if a timeout was removed, `0` if key does not exist or does not have an associated timeout
 
-##### *Example*
-{:lang="awk"}
-    redis_exists(c,"key)    # return 1
-    redis_ttl(c,"key")      # returns -1 if has no associated expire
+{title="Example: Using persist",lang=text,linenos=off}
+    redis_exists(c,"key) # returns 1
+    # returns -1 if has no associated expire
+    redis_ttl(c,"key")
     redis_expire(c,"key",100)  # returns 1
     redis_persist(c,"key")     # returns 1
     redis_persist(c,"key")     # returns 0
@@ -364,33 +360,32 @@ _**Description**_: Remove the expiration timer from a key.
 ### dump
 _**Description**_: Dump a key out of a redis database, the value of which can later be passed into redis using the RESTORE command.  The data that comes out of DUMP is a binary representation of the key as Redis stores it.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
+_**Return value**_        
 The Redis encoded value of the key, or `string null` if the key doesn't exist
 
-##### *Examples*
-{:lang="awk"}
+{title="Example: Using dump",lang=text,linenos=off}
     redis_set(c,"foo","bar")
     val=redis_dump(c,"foo")  # val will be the Redis encoded key value
 
 ### restore
 _**Description**_: Restore a key from the result of a DUMP operation.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name.  
 *number*: ttl number. How long the key should live (if zero, no expire will be set on the key).  
 *string*: value string (binary).  The Redis encoded key value (from DUMP).
 
-##### *Return value*
+_**Return value**_        
 `1` on sucess, `-1` on error
 
-##### *Examples*
-{:lang="awk"}
+{title="Example: Using restore",lang=text,linenos=off}
     redis_set(c,"foo","bar")
     val=redis_dump(c,"foo")
-    redis_restore(c,"bar",0,val)  # The key "bar", will now be equal to the key "foo"
+    # The key "bar", will now be equal to the key "foo"
+    redis_restore(c,"bar",0,val) 
 

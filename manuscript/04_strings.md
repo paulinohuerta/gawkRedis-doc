@@ -1,79 +1,79 @@
 # Strings
 
-* [append](#append) - Append a value to a key
-* [bitcount](#bitcount) - Count set bits in a string
-* [bitop](#bitop) - Perform bitwise operations between strings
-* [decr, decrby](#decr-decrby) - Decrement the value of a key
-* [get](#get) - Get the value of a key
-* [getbit](#getbit) - Returns the bit value at offset in the string value stored at key
-* [getrange](#getrange) - Get a substring of the string stored at a key
-* [getset](#getset) - Set the string value of a key and return its old value
-* [incr, incrby](#incr-incrby) - Increment the value of a key
-* [incrbyfloat](#incrbyfloat) - Increment the float value of a key by the given amount
-* [mget](#mget) - Get the values of all the given keys
-* [mset](#mset) - Set multiple keys to multiple values
-* [set](#set) - Set the string value of a key
-* [setbit](#setbit) - Sets or clears the bit at offset in the string value stored at key
-* [setrange](#setrange) - Overwrite part of a string at key starting at the specified offset
-* [strlen](#strlen) - Get the length of the value stored in a key
+1. [append](#append) - Append a value to a key
+1. [bitcount](#bitcount) - Count set bits in a string
+1. [bitop](#bitop) - Perform bitwise operations between strings
+1. [decr, decrby](#decr-decrby) - Decrement the value of a key
+1. [get](#get) - Get the value of a key
+1. [getbit](#getbit) - Returns the bit value at offset in the string value stored at key
+1. [getrange](#getrange) - Get a substring of the string stored at a key
+1. [getset](#getset) - Set the string value of a key and return its old value
+1. [incr, incrby](#incr-incrby) - Increment the value of a key
+1. [incrbyfloat](#incrbyfloat) - Increment the float value of a key by the given amount
+1. [mget](#mget) - Get the values of all the given keys
+1. [mset](#mset) - Set multiple keys to multiple values
+1. [set](#set) - Set the string value of a key
+1. [setbit](#setbit) - Sets or clears the bit at offset in the string value stored at key
+1. [setrange](#setrange) - Overwrite part of a string at key starting at the specified offset
+1. [strlen](#strlen) - Get the length of the value stored in a key
 
 -----
 
 ### get
 _**Description**_: Get the value related to the specified key
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: the key
 
-##### *Return value*
+_**Return value**_   
 *string*: `key value` or `null string` (empty string) if key didn't exist.
 
-##### *Examples*
-{:lang="awk"}
+{title="Example: Using get",lang=text,linenos=off}
     value=redis_get(c,"key1")
 
 ### set
 _**Description**_: Set the string value in argument as value of the key.  If you're using Redis >= 2.6.12, you can pass extended options as explained below
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key  
 *string*: value  
 *and optionally*: "EX",timeout,"NX" or "EX",timeout,"XX" or "PX" instead of "EX"
 
-##### *Return value*
+_**Return value**_   
 `1` if the command is successful `string null` if no success, or `-1` on error.
 
-##### *Examples*
-{:lang="awk"}
+{title="Example: Using set",lang=text,linenos=off}
     # Simple key -> value set
     redis_set(c,"key","value");
 
     # Will redirect, and actually make an SETEX call
     redis_set(c,"mykey1","myvalue1","EX",10)
 
-    # Will set the key, if it doesn't exist, with a ttl of 10 seconds
+    # Will set the key, if it doesn't exist, with a ttl
+    # of 10 seconds
     redis_set(c,"mykey1","myvalue1","EX",10,"NX")
 
-    # Will set a key, if it does exist, with a ttl of 10000 miliseconds
+    # Will set a key, if it does exist, with a ttl
+    # of 10000 miliseconds
     redis_set(c,"mykey1","myvalue1","PX",10000,"XX")
 
 ### incr, incrby
 _**Description**_: Increment the number stored at key by one. If the second argument is filled, it will be used as the integer value of the increment.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 *number*: value that will be added to key (only for incrby)
 
-##### *Return value*
+_***Return value**_    
 *number*: the new value
 
-##### *Examples*
-{:lang="awk"}
-    redis_incr(c,"key1") # key1 didn't exists, set to 0 before the increment
-                   # and now has the value 1
+{title="Example: Using incr",lang=text,linenos=off}
+    redis_incr(c,"key1")
+    # key1 didn't exists, set to 0 before the increment
+    # and now has the value 1
     redis_incr(c,"key1") #  value 2
     redis_incr(c,"key1") #  value 3
     redis_incr(c,"key1") #  value 4
@@ -82,17 +82,17 @@ _**Description**_: Increment the number stored at key by one. If the second argu
 ### incrbyfloat
 _**Description**_: Increment the key with floating point precision.
 
-##### *Parameters*
+_**Parameters**_   
 *number*: connection  
 *string*: key name  
 *value*: (float) value that will be added to the key  
 
-##### *Return value*
+_**Return value**_   
 *number*: the new value
 
-##### *Examples*
-{:lang="awk"}
-    redis_incrbyfloat(c,"key1", 1.5)  # key1 didn't exist, so it will now be 1.5
+{title="Example: Using incrbyfloat",lang=text,linenos=off}
+    redis_incrbyfloat(c,"key1", 1.5) 
+    # key1 didn't exist, so it will now be 1.5
     redis_incrbyfloat(c,"key1", 1.5)  # 3
     redis_incrbyfloat(c,"key1", -1.5) # 1.5
     redis_incrbyfloat(c,"key1", 2.5)  # 4
@@ -100,35 +100,34 @@ _**Description**_: Increment the key with floating point precision.
 ### decr, decrby
 _**Description**_: Decrement the number stored at key by one. If the second argument is filled, it will be used as the integer value of the decrement.
 
-##### *Parameters*
+_**Parameters**_     
 *number*: connection  
 *string*: key name  
 *number*: value that will be substracted to key (only for decrby)
 
-##### *Return value*
+_**Return value**_   
 *number*: the new value
 
-##### *Examples*
-{:lang="awk"}
-    redis_decr(c,"keyXY") # keyXY didn't exists, set to 0 before the increment 
-                    # and now has the value -1
+{title="Example: Using decr",lang=text,linenos=off}
+    redis_decr(c,"keyXY") 
+    # keyXY didn't exists, set to 0 before the increment 
+    # and now has the value -1
     redis_decr(c,"keyXY") # -2
-    redis_decr(c,"keyXY")   # -3
+    redis_decr(c,"keyXY") # -3
     redis_decrby(c,"keyXY",10)  # -13
 
 ### mget
 _**Description**_: Get the values of all the specified keys. If one or more keys dont exist, the array will contain `null string` at the position of the key.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *Array*: Array containing the list of the keys  
 *Array*: Array of results, containing the values related to keys in argument
 
-##### *Return value*
+_**Return value**_    
 `1` success `-1` on error
 
-##### *Examples*
-{:lang="awk"}
+{title="Example: Using mget",lang=text,linenos=off}
     @load "redis"
     BEGIN{
      null="\"\""
@@ -147,7 +146,8 @@ _**Description**_: Get the values of all the specified keys. If one or more keys
      ret=redis_mget(c,AR,K) # K is the array with results
      for(i=1; i<=length(K); i++){
        if(!K[i]) {
-         if(redis_exists(c,AR[i])){ # function exists was described previously
+         # function exists was described previously
+         if(redis_exists(c,AR[i])){ 
            print i": "AR[i]" ----> "null
          }
          else {
@@ -164,16 +164,15 @@ _**Description**_: Get the values of all the specified keys. If one or more keys
 ### getset
 _**Description**_: Sets a value and returns the previous entry at that key.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name   
 *string*: key value
 
-##### *Return value*
+_**Return value**_    
 A string, the previous value located at this key
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using getset",lang=text,linenos=off}
     redis_set(c,"x", "42")
     exValue=redis_getset(c,"x","lol") # return "42", now the value of x is "lol"
     newValue = redis_get(c,"x") # return "lol"
@@ -181,16 +180,15 @@ A string, the previous value located at this key
 ### append
 _**Description**_: Append specified string to the string stored in specified key.
 
-##### *Parameters*
+_**Parameters**_     
 *number*: connection  
 *string*: key name   
 *string*: value
 
-##### *Return value*
+_**Return value**_     
 *number*: Size of the value after the append
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using append",lang=text,linenos=off}
     redis_set(c,"key","value1")
     redis_append(c,"key","value2") # 12 
     redis_get(c,"key") # "value1value2"
@@ -198,17 +196,16 @@ _**Description**_: Append specified string to the string stored in specified key
 ### getrange
 _**Description**_: Return a substring of a larger string 
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 *number*: start  
 *number*: end  
 
-##### *Return value*
+_**Return value**_    
 *string*: the substring 
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using getrange",lang=text,linenos=off}
     redis_set(c,"key","string value");
     print redis_getrange(c,"key", 0, 5)  # "string"
     print redis_getrange(c,"key", -5, -1)  # "value"
@@ -216,17 +213,16 @@ _**Description**_: Return a substring of a larger string
 ### setrange
 _**Description**_: Changes a substring of a larger string.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 *number*: offset  
 *string*: value
 
-##### *Return value*
+_**Return value**_   
 *string*: the length of the string after it was modified.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using setrange",lang=text,linenos=off}
     redis_set(c,"key1","Hello world")
     ret=redis_setrange(c,"key1",6,"redis") # ret value 11
     redis_get(c,"key1") # "Hello redis"
@@ -235,15 +231,14 @@ _**Description**_: Changes a substring of a larger string.
 ### strlen
 _**Description**_: Get the length of a string value.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
-*number*
+_**Return value**_   
+*number*: length of string value
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using strlen",lang=text,linenos=off}
     redis_set(c,"key","value")
     redis_strlen(c,"key")  # 5
 
@@ -251,20 +246,19 @@ _**Description**_: Get the length of a string value.
 ### getbit
 _**Description**_: Return a single bit out of a larger string
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 *number*: offset
 
-##### *Return value*
+_**Return value**_   
 *number*: the bit value (0 or 1)
 
-##### *Example*
-{:lang="awk"}
-    redis_set(c,"key", "\x7f"); // this is 0111 1111
+{title="Example: Using getbit",lang=text,linenos=off}
+    redis_set(c,"key", "\x7f") # this is 0111 1111
     redis_getbit(c,"key", 0) # 0
     redis_getbit(c,"key", 1) # 1
-    redis_set(c,"key", "s"); // this is 0111 0011
+    redis_set(c,"key", "s")  # this is 0111 0011
     print redis_getbit(c,"key", 5) # 0
     print redis_getbit(c,"key", 6) # 1
     print redis_getbit(c,"key", 7) # 1
@@ -272,17 +266,16 @@ _**Description**_: Return a single bit out of a larger string
 ### setbit
 _**Description**_: Changes a single bit of a string.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name   
 *number*: offset  
 *number*: value (1 or 0)
 
-##### *Return value*
+_**Return value**_   
 *number*: 0 or 1, the value of the bit before it was set.
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using setbit",lang=text,linenos=off}
     @load "redis"
     BEGIN{
       c=redis_connect()
@@ -292,7 +285,8 @@ _**Description**_: Changes a single bit of a string.
       print redis_get(c,"key") #  "/" = "0010 1111"
       redis_set(c,"key1","?") # 00111111
       print redis_get(c,"key1")
-      print "key1: changing bit 7, it returns "setbit(c,"key1", 7, 0) # returns 1
+      print "key1: changing bit 7, it returns ",
+             setbit(c,"key1", 7, 0) # returns 1
       print "key1: value actual is 00111110"
       print redis_get(c,"key1") # retorna ">"
       redis_close(c)
@@ -301,37 +295,36 @@ _**Description**_: Changes a single bit of a string.
 ### bitop
 _**Description**_: Bitwise operation on multiple keys.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *operator*: either "AND", "OR", "NOT", "XOR"   
 *ret_key*: result key   
 *array or string*: array containing the keys or only one string (in case of using the NOT operator).
 
-##### *Return value*
+_**Return value**_   
 *number*: The size of the string stored in the destination key.
 
 ### bitcount
 _**Description**_: Count bits in a string.
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *string*: key name  
 
-##### *Return value*
+_**Return value**_   
 *number*: The number of bits set to 1 in the value behind the input key.
 
 ### mset, msetnx
 _**Description**_: Sets multiple key-value pairs in one atomic command. msetnx only returns `1` if all the keys were set (see set and option nx).
 
-##### *Parameters*
+_**Parameters**_    
 *number*: connection  
 *array*: keys and their respectives values  
 
-##### *Return value*
+_**Return value**_   
 `1` in case of success, `-1` on error. while msetnx returns `0` if no key was set (at least one key already existed).
 
-##### *Example*
-{:lang="awk"}
+{title="Example: Using mset",lang=text,linenos=off}
     @load "redis"
     BEGIN {
      AR[1]="q1"
