@@ -1,4 +1,4 @@
-# Strings
+# Strings Functions
 
 1. [append](#append) - Append a value to a key
 1. [bitcount](#bitcount) - Count set bits in a string
@@ -345,8 +345,7 @@ _**Return value**_
      redis_close(c)
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     1 returned by mset
     1) q2
     2) q3

@@ -2,3 +2,4 @@
 02_connection.md
 03_keys.md
 04_strings.md
+05_hashes.md
