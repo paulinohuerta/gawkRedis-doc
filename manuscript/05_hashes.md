@@ -1,4 +1,4 @@
-# Hashes Functions {hashes}
+# Hashes Functions {#hashes}
 
 1. [hdel](#hdel) - Deletes one or more hash fields
 1. [hexists](#hexists) - Determines if a hash field exists
@@ -64,7 +64,7 @@ _**Return value**_
 *string*: the value associated with field, or `string null` when field is not present in the hash or the key does not exist.
 
 
-### hlen {hlen}
+### hlen {#hlen}
 _**Description**_: Returns the length of a hash, in number of items
 
 _**Parameters**_    
@@ -165,7 +165,7 @@ _**Return value**_
 
 The order is random and corresponds to redis' own internal representation of the structure.
 
-### hscan {hscan}
+### hscan {#hscan}
 _**Description**_: iterates elements of Hash types. Please read how it works from Redis [hscan](http://redis.io/commands/hscan) command.
 
 _**Parameters**_    
