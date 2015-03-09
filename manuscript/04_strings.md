@@ -1,4 +1,4 @@
-# Strings Functions
+# Strings Functions {#strings}
 
 1. [append](#append) - Append a value to a key
 1. [bitcount](#bitcount) - Count set bits in a string
@@ -11,7 +11,7 @@
 1. [incr, incrby](#incr-incrby) - Increment the value of a key
 1. [incrbyfloat](#incrbyfloat) - Increment the float value of a key by the given amount
 1. [mget](#mget) - Get the values of all the given keys
-1. [mset](#mset) - Set multiple keys to multiple values
+1. [mset](#mset-msetnx) - Set multiple keys to multiple values
 1. [set](#set) - Set the string value of a key
 1. [setbit](#setbit) - Sets or clears the bit at offset in the string value stored at key
 1. [setrange](#setrange) - Overwrite part of a string at key starting at the specified offset
@@ -19,7 +19,7 @@
 
 -----
 
-### get
+### get {#get}
 _**Description**_: Get the value related to the specified key
 
 _**Parameters**_    
@@ -32,7 +32,7 @@ _**Return value**_
 {title="Example: Using get",lang=text,linenos=off}
     value=redis_get(c,"key1")
 
-### set
+### set {#set}
 _**Description**_: Set the string value in argument as value of the key.  If you're using Redis >= 2.6.12, you can pass extended options as explained below
 
 _**Parameters**_   
@@ -59,7 +59,7 @@ _**Return value**_
     # of 10000 miliseconds
     redis_set(c,"mykey1","myvalue1","PX",10000,"XX")
 
-### incr, incrby
+### incr, incrby {#incr-incrby}
 _**Description**_: Increment the number stored at key by one. If the second argument is filled, it will be used as the integer value of the increment.
 
 _**Parameters**_   
@@ -79,7 +79,7 @@ _***Return value**_
     redis_incr(c,"key1") #  value 4
     redis_incrby(c,"key1",10) #  value 14
 
-### incrbyfloat
+### incrbyfloat {#incrbyfloat}
 _**Description**_: Increment the key with floating point precision.
 
 _**Parameters**_   
@@ -97,7 +97,7 @@ _**Return value**_
     redis_incrbyfloat(c,"key1", -1.5) # 1.5
     redis_incrbyfloat(c,"key1", 2.5)  # 4
 
-### decr, decrby
+### decr, decrby {#decr-decrby}
 _**Description**_: Decrement the number stored at key by one. If the second argument is filled, it will be used as the integer value of the decrement.
 
 _**Parameters**_     
@@ -116,7 +116,7 @@ _**Return value**_
     redis_decr(c,"keyXY") # -3
     redis_decrby(c,"keyXY",10)  # -13
 
-### mget
+### mget {#mget}
 _**Description**_: Get the values of all the specified keys. If one or more keys dont exist, the array will contain `null string` at the position of the key.
 
 _**Parameters**_    
@@ -161,7 +161,7 @@ _**Return value**_
      redis_close(c)
     }
 
-### getset
+### getset {#getset}
 _**Description**_: Sets a value and returns the previous entry at that key.
 
 _**Parameters**_    
@@ -177,7 +177,7 @@ A string, the previous value located at this key
     exValue=redis_getset(c,"x","lol") # return "42", now the value of x is "lol"
     newValue = redis_get(c,"x") # return "lol"
 
-### append
+### append {#append}
 _**Description**_: Append specified string to the string stored in specified key.
 
 _**Parameters**_     
@@ -193,7 +193,7 @@ _**Return value**_
     redis_append(c,"key","value2") # 12 
     redis_get(c,"key") # "value1value2"
 
-### getrange
+### getrange {#getrange}
 _**Description**_: Return a substring of a larger string 
 
 _**Parameters**_    
@@ -210,7 +210,7 @@ _**Return value**_
     print redis_getrange(c,"key", 0, 5)  # "string"
     print redis_getrange(c,"key", -5, -1)  # "value"
 
-### setrange
+### setrange {#setrange}
 _**Description**_: Changes a substring of a larger string.
 
 _**Parameters**_    
@@ -228,7 +228,7 @@ _**Return value**_
     redis_get(c,"key1") # "Hello redis"
 
 
-### strlen
+### strlen {#strlen}
 _**Description**_: Get the length of a string value.
 
 _**Parameters**_    
@@ -243,7 +243,7 @@ _**Return value**_
     redis_strlen(c,"key")  # 5
 
 
-### getbit
+### getbit {#getbit}
 _**Description**_: Return a single bit out of a larger string
 
 _**Parameters**_    
@@ -263,7 +263,7 @@ _**Return value**_
     print redis_getbit(c,"key", 6) # 1
     print redis_getbit(c,"key", 7) # 1
 
-### setbit
+### setbit {#setbit}
 _**Description**_: Changes a single bit of a string.
 
 _**Parameters**_    
@@ -292,7 +292,7 @@ _**Return value**_
       redis_close(c)
     }
 
-### bitop
+### bitop {#bitop}
 _**Description**_: Bitwise operation on multiple keys.
 
 _**Parameters**_    
@@ -304,7 +304,7 @@ _**Parameters**_
 _**Return value**_   
 *number*: The size of the string stored in the destination key.
 
-### bitcount
+### bitcount {#bitcount}
 _**Description**_: Count bits in a string.
 
 _**Parameters**_    
@@ -314,7 +314,7 @@ _**Parameters**_
 _**Return value**_   
 *number*: The number of bits set to 1 in the value behind the input key.
 
-### mset, msetnx
+### mset, msetnx {#mset-msetnx}
 _**Description**_: Sets multiple key-value pairs in one atomic command. msetnx only returns `1` if all the keys were set (see set and option nx).
 
 _**Parameters**_    

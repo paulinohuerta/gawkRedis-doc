@@ -3,3 +3,4 @@
 03_keys.md
 04_strings.md
 05_hashes.md
+06_lists.md

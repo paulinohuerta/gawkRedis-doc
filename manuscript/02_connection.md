@@ -1,4 +1,4 @@
-# Connection Functions
+# Connection Functions {#connection}
 
 1. [connect](#connect) - Connect to a Redis server
 1. [auth](#auth) - Authenticate to the server
@@ -7,7 +7,7 @@
 1. [ping](#ping) - Ping the server
 1. [echo](#echo) - Echo the given string
 
-### connect     
+### connect {#connect}    
 _**Description**_: Connects to a Redis instance.    
 
 _**Parameters**_   
@@ -24,7 +24,7 @@ _**Return value**_
     # host address 127.0.0.1 and port 6379 by default
     c=redis_connect()
 
-### auth    
+### auth {#auth}   
 _**Description**_: Authenticate the connection using a password.   
 
 _**Parameters**_   
@@ -43,7 +43,7 @@ _**Return value**_
       # not authenticated
     }
 
-### select
+### select {#select}
 _**Description**_: Change the selected database for the current connection.  
 
 _**Parameters**_  
@@ -55,7 +55,7 @@ _**Return value**_
 {title="Example: Using select",lang=text,linenos=off}
     redis_select(c,5)
 
-### close, disconnect
+### close, disconnect {#close-disconnect}
 _**Description**_: Disconnects from the Redis instance.   
 
 _**Parameters**_  
@@ -70,7 +70,7 @@ _**Return value**_
       print ERRNO
     }
 
-### ping
+### ping {#ping}
 _**Description**_: Check the current connection status   
 
 _**Parameters**_    
@@ -79,7 +79,7 @@ _**Parameters**_
 _**Return value**_  
 *string*: `PONG` on success.  
 
-### echo
+### echo {#echo}
 _**Description**_: Sends a string to Redis, which replies with the same string   
 _**Parameters**_    
 *number*: connection  

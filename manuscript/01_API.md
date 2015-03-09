@@ -47,7 +47,8 @@ which must run with:
 ## The API Functions
 
 * [Connection](#connection)
-* [Keys and strings](#keys-and-strings)
+* [Keys](#keys)
+* [Strings](#strings)
 * [Hashes](#hashes)
 * [Lists](#lists)
 * [Sets](#sets)

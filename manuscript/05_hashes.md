@@ -15,7 +15,7 @@
 1. [hscan](#hscan) - Iterates elements of Hash types
 1. [hvals](#hvals) - Gets all the values in a hash
 
-### hset
+### hset {#hset}
 _**Description**_: Adds a value to the hash stored at key. If this value is already in the hash, `FALSE` is returned.  
 
 _**Parameters**_    
@@ -39,7 +39,7 @@ _**Return value**_
      redis_close(c)
     }
 
-### hsetnx
+### hsetnx {#hsetnx}
 _**Description**_: Adds a value to the hash stored at key only if this field isn't already in the hash.
 
 _**Return value**_    
@@ -52,7 +52,7 @@ _**Return value**_
     redis_hsetnx(c,"thehash", "key1", "plop") # returns 0. No change, value wasn't replaced
     redis_hget(c,"thehash", "key1") # returns "hello"
 
-### hget
+### hget {#hget}
 _**Description**_: Gets a value associated with a field from the hash stored it key.
 
 _**Parameters**_    
@@ -80,7 +80,7 @@ _**Return value**_
     redis_hsetnx(c,"thehash","key3","hello3") # returns 1
     redis_hlen(c,"thehash")  # returns 3
 
-### hdel
+### hdel {#hdel}
 _**Description**_: Removes the specified fields from the hash stored at key.
 
 _**Parameters**_    
@@ -92,7 +92,7 @@ _**Return value**_
 *number*: the number of fields that were removed from the hash, not including specified but non existing fields.
 
 
-### hkeys
+### hkeys {#hkeys}
 _**Description**_: Obtains the keys in a hash.
 
 _**Parameters**_    
@@ -116,7 +116,7 @@ _**Return value**_
 
 The order is random and corresponds to redis' own internal representation of the structure.
 
-### hvals
+### hvals {#hvals}
 _**Description**_: Obtains the values in a hash.
 
 _**Parameters**_    
@@ -140,7 +140,7 @@ _**Return value**_
 
 The order is random and corresponds to redis' own internal representation of the structure.
 
-### hgetall
+### hgetall {#hgetall}
 _**Description**_: Returns the whole hash.
 
 _**Parameters**_    
@@ -206,7 +206,7 @@ _**Return value**_
       redis_close(c)
     }
 
-### hexists
+### hexists {#hexists}
 _**Description**_: Verify if the specified member exists in a hash.
 
 _**Parameters**_    
@@ -233,18 +233,16 @@ _**Return value**_
       redis_close(c)
     }
 
-### hincrby
+### hincrby {#hincrby}
 _**Description**_: Increments the value of a member from a hash by a given amount.
 
 _**Parameters**_    
-##### *Parameters*
 *number*: connection  
 *string*: key name  
 *string*: member or field    
 *number*: (integer) value that will be added to the member's value  
 
 _**Return value**_    
-##### *Return value*
 *number*: the new value
 
 {title="Example: Using hincrby",lang=text,linenos=off} 
@@ -254,7 +252,7 @@ _**Return value**_
     print redis_hincrby(c,"hashb","field", -10)# returns -5
 
 
-### hincrbyfloat
+### hincrbyfloat {#hincrbyfloat}
 _**Description**_: Increments the value of a hash member by the provided float value
 
 _**Parameters**_    
@@ -275,7 +273,7 @@ _**Return value**_
     redis_hincrbyfloat(c,"h","x",-3.0)
       # returns 0.0: field x = 0.0 now
 
-### hmset
+### hmset {#hmset}
 _**Description**_: Fills in a whole hash. Overwriting any existing fields in the hash. If key does not exist, a new key holding a hash is created.
 
 _**Parameters**_    
@@ -294,7 +292,7 @@ _**Return value**_
     AR[4]="value of a1"
     ret=redis_hmset(c,"hash1",AR1)
 
-### hmget
+### hmget {#hmget}
 _**Description**_: Retrieve the values associated to the specified fields in the hash.
 
 _**Parameters**_    

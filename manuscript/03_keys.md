@@ -1,7 +1,7 @@
-# Keys Functions
+# Keys Functions {#keys}
 
 1. [del](#del) - Delete a key
-* [dump](#dump) - Return a serialized version of the value stored at the specified key.
+1. [dump](#dump) - Return a serialized version of the value stored at the specified key.
 1. [exists](#exists) - Determine if a key exists
 1. [expire, pexpire](#expire-pexpire) - Set a key's time to live in seconds
 1. [keys](#keys) - Find all keys matching the given pattern
@@ -21,7 +21,7 @@
 
 -----
 
-### del
+### del {#del}
 _**Description**_: Remove specified keys.
 
 _**Parameters**_  
@@ -41,7 +41,7 @@ _**Return value**_
     redis_del(c,"keyX") # return 1 
     redis_del(c,AR) # return 3
 
-### exists
+### exists {#dump}
 _**Description**_: Verify if the specified key exists.
 
 _**Parameters**_     
@@ -56,7 +56,7 @@ _**Return value**_
     redis_exists(c,"key"); # return 1
     redis_exists(c,"NonExistingKey") # return 0
 
-### randomKey
+### randomKey {#randomkey}
 _**Description**_: Returns a random key.
 
 _**Parameters**_    
@@ -68,7 +68,7 @@ _**Return value**_
 {title="Example: Using randomKey",lang=text,linenos=off}
     print redis_randomkey(c)
 
-### move
+### move {#move}
 _**Description**_: Moves a key to a different database. The key will move only if not exists in destination database.
 
 _**Parameters**_   
@@ -86,7 +86,7 @@ _**Return value**_
     redis_select(c,1)	  # switch to DB 1
     redis_get(c,"x");	  # will return 42
 
-### rename
+### rename {#rename}
 _**Description**_: Renames a key. If newkey already exists it is overwritten.
 
 _**Parameters**_    
@@ -104,13 +104,13 @@ _**Return value**_
     redis_get(c,"x")  # return null string, because x 
                       # no longer exists
 
-### renamenx
+### renamenx {#renamenx}
 _**Description**_: Same as rename, but will not replace a key if the destination already exists. This is the same behaviour as set and option nx.
 
 _**Return value**_     
 `1` in case of success, `0` in case not success.
 
-### expire, pexpire
+### expire, pexpire {#expire-pexpire}
 _**Description**_: Sets an expiration date (a timeout) on an item. pexpire requires a TTL in milliseconds.
 
 _**Parameters**_    
@@ -128,7 +128,7 @@ _**Return value**_
     redis_get(c,"x") # will return null string,
                      # as x has expired
 
-### keys
+### keys {#keys}
 _**Description**_: Returns the keys that match a certain pattern. Check supported [glob-style patterns](http://redis.io/commands/keys)
 
 _**Parameters**_    
@@ -149,7 +149,7 @@ _**Return value**_
       print i": "AR[i]
     }
 
-### type
+### type {#type}
 _**Description**_: Returns the type of data pointed by a given key.
 
 _**Parameters**_    
@@ -169,7 +169,7 @@ _**Return value**_
       print i": "KEYS[i]" ---> "redis_type(c,KEYS[i])
     } 
 
-### sort
+### sort {#sort}
 _**Description**_: Sort the elements in a list, set or sorted set.
 
 _**Parameters**_   
@@ -203,7 +203,7 @@ _**Return value**_
     print "-----"
 
 
-### sortLimit
+### sortLimit {#sortlimit}
 _**Description**_: Sort the elements in a list, set or sorted set, using the LIMIT modifier with the sense of limit the number of returned elements.
 
 _**Parameters**_     
@@ -235,7 +235,7 @@ _**Return value**_
     redis_close(c)
 
 
-### sortLimitStore
+### sortLimitStore {#sortlimitstore}
 _**Description**_: Sort the elements in a list, set or sorted set, using the LIMIT and STORE modifiers with the sense of limit the number of returned elements and ensure that the result is stored as in a new key instead of be returned.
 
 _**Parameters**_   
@@ -258,7 +258,7 @@ _**Return value**_
     # or using a sixth argument 
     # redis_sortLimitStore(c,"list2","listb",0,5,"desc")
 
-### sortStore
+### sortStore {#sortstore}
 _**Description**_: Sort the elements in a list, set or sorted set, using the STORE modifier for that the result to be stored in a new key
 
 ##### *Parameters**_    
@@ -284,7 +284,7 @@ _**Description**_: Sort the elements in a list, set or sorted set, using the STO
     # ret=redis_sortStore(c,"list2","listb","desc alpha")
 
 
-### scan
+### scan {#scan}
 _**Description**_: iterates the set of keys. Please read how it works from Redis [scan](http://redis.io/commands/scan) command
 
 _**Parameters**_    
@@ -326,7 +326,7 @@ _**Return value**_
      redis_close(c)
     }
 
-### ttl, pttl
+### ttl, pttl {#ttl-pttl}
 _**Description**_: Returns the time to live left for a given key in seconds (ttl), or milliseconds (pttl).
 
 _**Parameters**_    
@@ -339,7 +339,7 @@ _**Return value**_
 {title="Example: Using ttl",lang=text,linenos=off}
     redis_ttl(c,"key")
 
-### persist
+### persist {#persist}
 _**Description**_: Remove the expiration timer from a key.
 
 _**Parameters**_   
@@ -357,7 +357,7 @@ _**Return value**_
     redis_persist(c,"key")     # returns 1
     redis_persist(c,"key")     # returns 0
 
-### dump
+### dump {#dump}
 _**Description**_: Dump a key out of a redis database, the value of which can later be passed into redis using the RESTORE command.  The data that comes out of DUMP is a binary representation of the key as Redis stores it.
 
 _**Parameters**_   
@@ -371,7 +371,7 @@ The Redis encoded value of the key, or `string null` if the key doesn't exist
     redis_set(c,"foo","bar")
     val=redis_dump(c,"foo")  # val will be the Redis encoded key value
 
-### restore
+### restore {#restore}
 _**Description**_: Restore a key from the result of a DUMP operation.
 
 _**Parameters**_   
