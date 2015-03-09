@@ -4,3 +4,5 @@
 04_strings.md
 05_hashes.md
 06_lists.md
+07_sets.md
+08_sortedSets.md

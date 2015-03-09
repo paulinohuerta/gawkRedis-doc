@@ -46,16 +46,16 @@ which must run with:
 
 ## The API Functions
 
-* [Connection](#connection)
-* [Keys](#keys)
-* [Strings](#strings)
-* [Hashes](#hashes)
-* [Lists](#lists)
-* [Sets](#sets)
-* [Sorted sets](#sorted-sets)
-* [Pub/sub](#pubsub) 
-* [Pipelining](#pipelining)
-* [Scripting](#scripting)
-* [Server](#server)  
-* [Transactions](#transactions)
+1. [Connection](#connection)
+1. [Keys](#keys)
+1. [Strings](#strings)
+1. [Hashes](#hashes)
+1. [Lists](#lists)
+1. [Sets](#sets)
+1. [Sorted sets](#sorted-sets)
+1. [Pub/sub](#pubsub) 
+1. [Pipelining](#pipelining)
+1. [Scripting](#scripting)
+1. [Server](#server)  
+1. [Transactions](#transactions)
 
