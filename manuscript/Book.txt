@@ -6,3 +6,4 @@
 06_lists.md
 07_sets.md
 08_sortedSets.md
+09_pubsub.md
