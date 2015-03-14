@@ -266,7 +266,7 @@ _**Return value**_
     6: 1
 
 
-### zlexcount
+### zlexcount {#zlexcount}
 _**Description**_: When all the elements in a sorted set are inserted with the same score, returns the number of elements with a value between min and max specified, forcing lexicographical ordering.
 To see [the Redis command](http://redis.io/commands/zlexcount) to know how to specify intervals and others details.
 

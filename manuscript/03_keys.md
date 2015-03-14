@@ -17,7 +17,7 @@
 1. [scan](#scan) - iterates the set of keys in the currently selected Redis db
 1. [type](#type) - Determine the type stored at key
 1. [ttl, pttl](#ttl-pttl) - Get the time to live for a key
-1. [restore](#restore) - Create a key using the provided serialized value, previously obtained with [dump](#dump).
+1. [restore](#restore) - Create a key using the provided serialized value, previously obtained with *dump*.
 
 -----
 
@@ -41,7 +41,7 @@ _**Return value**_
     redis_del(c,"keyX") # return 1 
     redis_del(c,AR) # return 3
 
-### exists {#dump}
+### exists {#exists}
 _**Description**_: Verify if the specified key exists.
 
 _**Parameters**_     
