@@ -34,7 +34,8 @@ _**Return value**_
 *number*: `the cardinality` or number de elements, `0` if key does not exist. `-1` on error.
 
 {title="Example: Using zcard",lang=text,linenos=off}
-    print "Cardinality of 'zmyset': "redis_zcard(c,"zmyset")
+    print "Cardinality of 'zmyset':",
+           redis_zcard(c,"zmyset")
 
 ### zrevrank {#zrevrank}
 _**Description**_: Returns the rank of a member in the sorted set, with the scores ordered from high to low. The rank (or index) is 0-based, which means that the member with the highest score has rank 0.
@@ -56,7 +57,8 @@ _**Return value**_
       A[5]="3"; A[6]="three"; A[7]="4"; A[8]="four"
       redis_zadd(c,"myzset",A)
       redis_zrevrank(c,"myzset","four") # returns 0
-      redis_zrevrank(c,"myzset","seven") # returns null string
+      redis_zrevrank(c,"myzset","seven")
+       # and returns null string
       redis_zrevrank(c,"myzset","two") # returns 2
       redis_close(c)
     }
@@ -80,8 +82,8 @@ _**Return value**_
     AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"
     r3=redis_zadd(c,"zmyset",AR)
     print r1, r2, r3
-    print "Zcount with score between 1 and 2: "redis_zcount(c,"zmyset",1,2) # returns 3
-
+    print "Zcount with score between 1 and 2:",
+          redis_zcount(c,"zmyset",1,2) # returns 3
 
 ### zinterstore {#zinterstore}
 _**Description**_: Intersects multiple sorted sets and store the resulting sorted set in a new key.
@@ -100,7 +102,8 @@ _**Return value**_
 
 {title="Example: Using zinterstore",lang=text,linenos=off}
     redis_del(c,"zmyset1")
-    A[1]="1"; A[2]="one"; A[3]="3"; A[4]="three"; A[5]="5"; A[6]="five"
+    A[1]="1"; A[2]="one"; A[3]="3"; A[4]="three"
+    A[5]="5"; A[6]="five"
     redis_zadd(c,"zmyset1",A)
     redis_del(c,"zmyset2")
     delete A
@@ -108,14 +111,19 @@ _**Return value**_
     redis_zadd(c,"zmyset2",A)
     redis_del(c,"zmyset3")
     delete A
-    A[1]="3"; A[2]="three"; A[3]="4"; A[4]="four"; A[5]="5"; A[6]="five"
+    A[1]="3"; A[2]="three"; A[3]="4"; A[4]="four"
+    A[5]="5"; A[6]="five"
     redis_zadd(c,"zmyset3",A)
     delete A
     A[1]="zmyset1"; A[2]="zmyset2"; A[3]="zmyset3"
-    redis_zinterstore(c,"zmysetInter",A)  # members expected in sorte set zmysetInter: 'three' with score 9
+    redis_zinterstore(c,"zmysetInter",A)
+    # members expected in sorte set zmysetInter: 'three'
+    # with score 9
     W[1]=2; W[2]=3; W[3]=4
-    redis_zinterstore(c,"zmysetInterWeights",A,W,"aggregate sum") # 'three' with score 27
-    redis_zinterstore(c,"zmysetInterWeights",A,W,"aggregate min") # 'three' with score 6
+    redis_zinterstore(c,"zmysetInterWeights",A,W,"aggregate sum")
+    # 'three' with score 27
+    redis_zinterstore(c, "zmysetInterWeights", A,W, "aggregate min")
+    # 'three' with score 6
 
 ### zunionstore {#zunionstore}
 _**Description**_: Adds multiple sorted sets and store the resulting sorted set in a new key.
@@ -134,7 +142,8 @@ _**Return value**_
 
 {title="Example: Using zunionstore",lang=text,linenos=off}
     redis_del(c,"zmyset1")
-    A[1]="1"; A[2]="one"; A[3]="3"; A[4]="three"; A[5]="5"; A[6]="five"
+    A[1]="1"; A[2]="one"; A[3]="3"; A[4]="three"
+    A[5]="5"; A[6]="five"
     redis_zadd(c,"zmyset1",A)
     redis_del(c,"zmyset2")
     delete A
@@ -142,13 +151,16 @@ _**Return value**_
     redis_zadd(c,"zmyset2",A)
     redis_del(c,"zmyset3")
     delete A
-    A[1]="3"; A[2]="three"; A[3]="4"; A[4]="four"; A[5]="5"; A[6]="five"
+    A[1]="3"; A[2]="three"; A[3]="4"; A[4]="four"
+    A[5]="5"; A[6]="five"
     redis_zadd(c,"zmyset3",A)
     delete A
     A[1]="zmyset1"; A[2]="zmyset2"; A[3]="zmyset3"
     W[1]=2; W[2]=3; W[3]=4
-    redis_zunionstore(c,"zmysetUW",A,W,"aggregate sum") # one,2  three,27  four,28  five,30 
-    redis_zunionstore(c,"zmysetUW",A,W,"aggregate min") # one,2  three,6  four,12  five,10
+    redis_zunionstore(c,"zmysetUW",A,W,"aggregate sum")
+     # one,2  three,27  four,28  five,30 
+    redis_zunionstore(c,"zmysetUW",A,W,"aggregate min")
+     # one,2  three,6  four,12  five,10
 
 
 ### zrange {#zrange}
@@ -169,8 +181,11 @@ _**Return value**_
     AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three";
     AR[5]="1"; AR[6]="one"; AR[7]="1"; AR[8]="uno"
     redis_zadd(c,"zmyset",AR)
-    redis_zrange(c,"zmyset",RET,6,-1) # returns 0, and array RET is empty
-    redis_zrange(c,"zmyset",RET,1,2) # returns 1, and array RET contains members
+    redis_zrange(c,"zmyset",RET,6,-1) 
+     # returns 0, and array RET is empty
+    redis_zrange(c,"zmyset",RET,1,2) 
+     # returns 1, and array RET contains members
+     #
      # shows the results
     for( i in RET ) {
       print RET[i]
@@ -199,7 +214,7 @@ _**Return value**_
       redis_zadd(c,"myzset","5","t1")
       redis_zadd(c,"myzset","4","t9")
        #  zrevrange(c,"myzset",RES,6,-1)  # returns 0
-      print redis_zrevrange(c,"myzset",RES,0,-1)  # returns 1
+      print redis_zrevrange(c,"myzset",RES,0,-1)# returns 1
       for (i in RES) {
          print i": "RES[i]
       }
@@ -328,10 +343,12 @@ _**Return value**_
       redis_zadd(c,"myzset","2","t0")
       redis_zadd(c,"myzset","5","t1")
       redis_zadd(c,"myzset","4","t9")
-        #  redis_zremrangebyscore(c,"myzset","-inf","(5") # returns 3
-        #  redis_zremrangebyscore(c,"myzset",1,3) # returns 2
-      redis_zremrangebyscore(c,"myzset","(2","4") # returns 1
-      redis_zrangeWithScores(c,"myzset",RES,0,-1)  # returns 1, and the results in array RES
+       # redis_zremrangebyscore(c,"myzset","-inf","(5")
+       # returns 3
+       # redis_zremrangebyscore(c,"myzset",1,3)# returns 2
+      redis_zremrangebyscore(c,"myzset","(2","4")#returns 1
+      redis_zrangeWithScores(c,"myzset",RES,0,-1)
+       # returns 1, and the results in array RES
       for (i in RES) {
          print i": "RES[i]
       }
@@ -409,7 +426,8 @@ _**Return value**_
       print i": "AR[i]
     }
      # the next return is 0
-    redis_zrangebylex(c,"zset",AR,"[pau","(ra") # the array has not content
+    redis_zrangebylex(c,"zset",AR,"[pau","(ra")
+     # the array has not content
 
 ### zrangebyscore {#zrangebyscore}
 _**Description**_: Returns all the elements with a score between min and max specified. The elements are considered to be ordered from low to high scores.
@@ -433,7 +451,8 @@ _**Return value**_
       redis_zadd(c,"myzset","1","one")
       redis_zadd(c,"myzset","2","two")
       redis_zadd(c,"myzset","3","three")
-      redis_zrangebyscore(c,"myzset",RES,"-inf","+inf") # returns 1
+      redis_zrangebyscore(c,"myzset",RES,"-inf","+inf")
+        # returns 1
       for (i in RES) {
          print i": "RES[i]
       }
@@ -442,7 +461,8 @@ _**Return value**_
       for (i in RES) {
          print i": "RES[i]
       }
-      redis_zrangebyscore(c,"myzset",RES,"(1","(2") # returns 0
+      redis_zrangebyscore(c,"myzset",RES,"(1","(2")
+      # returns 0
       redis_close(c)
     }
 
@@ -468,12 +488,14 @@ _**Return value**_
       redis_zadd(c,"myzset","1","one")
       redis_zadd(c,"myzset","2","two")
       redis_zadd(c,"myzset","3","three")
-      redis_zrevrangebyscore(c,"myzset",RES,"+inf","-inf") # returns 1
+      redis_zrevrangebyscore(c,"myzset",RES,"+inf","-inf")
+       # returns 1
       for (i in RES) {
          print i": "RES[i]
       }
       delete RES
-      redis_zrevrangebyscore(c,"myzset",RES,"2","1") # returns 1
+      redis_zrevrangebyscore(c,"myzset",RES,"2","1")
+       # returns 1
       print
       for (i in RES) {
          print i": "RES[i]
@@ -510,7 +532,9 @@ _**Return value**_
     redis_zrange(c,"zmyset",RET,0,-1) #  gets only elements
      # use RET ... and then remove 
     delete RET
-    redis_zrangeWithScores(c,"zmyset",RET,0,-1) # gets all elements with their respectives scores
+    redis_zrangeWithScores(c,"zmyset",RET,0,-1)
+     # gets all elements with their respectives scores
+     #
      # shows the results
     for( i in RET ) {
       print RET[i]
@@ -529,7 +553,8 @@ _**Return value**_
 
 {title="Example: Using zrem",lang=text,linenos=off}
     redis_del(c,"zmyset")
-    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"; AR[5]="1"; AR[6]="one"
+    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"
+    AR[5]="1"; AR[6]="one"
     redis_zadd(c,"zmyset",AR)
     redis_zrem(c,"zmyset","three") # returns 1
     R[1]="uno"; R[2]="two"; R[3]="five"
@@ -549,7 +574,8 @@ _**Return value**_
 {title="Example: Using zrank",lang=text,linenos=off}
     redis_del(c,"zmyset")
     redis_zadd(c,"zmyset",1,"uno")
-    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"; AR[5]="1"; AR[6]="one"
+    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"
+    AR[5]="1"; AR[6]="one"
     redis_zadd(c,"zmyset",AR)
     redis_zrank(c,"zmyset","three") # returns 3
     redis_zrank(c,"zmyset","one") # returns 0
@@ -568,7 +594,8 @@ _**Return value**_
 {title="Example: Using zscore",lang=text,linenos=off}
     redis_del(c,"zmyset")
     redis_zadd(c,"zmyset",1,"uno")
-    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"; AR[5]="1"; AR[6]="one"
+    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"
+    AR[5]="1"; AR[6]="one"
     redis_zadd(c,"zmyset",AR)
     redis_zscore(c,"zmyset","three") # returns 3
     redis_zscore(c,"zmyset","one") # returns 1
@@ -588,9 +615,11 @@ _**Return value**_
 {title="Example: Using zincrby",lang=text,linenos=off}
     redis_del(c,"zmyset")
     redis_zadd(c,"zmyset",1,"uno")
-    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"; AR[5]="1"; A[6]="one"
+    AR[1]="2"; AR[2]="two"; AR[3]="3"; AR[4]="three"
+    AR[5]="1"; A[6]="one"
     redis_zadd(c,"zmyset",AR)
-    # redis_zincrby increments '3' the score of the member 'one' of key 'zmyset'
+    # redis_zincrby increments '3' the score of the
+    # member 'one' of key 'zmyset'
     redis_zincrby(c,"zmyset",3,"one") # returns 4
 
 ### zadd {#zadd}
