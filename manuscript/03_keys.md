@@ -4,7 +4,7 @@
 1. [dump](#dump) - Return a serialized version of the value stored at the specified key.
 1. [exists](#exists) - Determine if a key exists
 1. [expire, pexpire](#expire-pexpire) - Set a key's time to live in seconds
-1. [keys](#keys) - Find all keys matching the given pattern
+1. [keys](#keysfunction) - Find all keys matching the given pattern
 1. [move](#move) - Move a key to another database
 1. [persist](#persist) - Remove the expiration from a key
 1. [randomkey](#randomkey) - Return a random key from the keyspace
@@ -128,7 +128,7 @@ _**Return value**_
     redis_get(c,"x") # will return null string,
                      # as x has expired
 
-### keys {#keys}
+### keys {#keysfunction}
 _**Description**_: Returns the keys that match a certain pattern. Check supported [glob-style patterns](http://redis.io/commands/keys)
 
 _**Parameters**_    
