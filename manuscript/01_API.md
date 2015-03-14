@@ -54,8 +54,8 @@ which must run with:
 1. [Sets](#sets)
 1. [Sorted sets](#sorted-sets)
 1. [Pub/sub](#pubsub) 
-1. [Pipelining]
-1. [Scripting]
+1. [Pipelining](#pipelining)
+1. [Scripting](#scripting)
 1. [Server]
 1. [Transactions]
 

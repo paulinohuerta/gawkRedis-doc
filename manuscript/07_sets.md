@@ -1,4 +1,4 @@
-## Sets {#sets}
+# Sets {#sets}
 
 1. [sadd](#sadd) - Adds one or more members to a set
 1. [scard](#scard) - Gets the number of members in a set
