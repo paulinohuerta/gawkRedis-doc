@@ -56,6 +56,6 @@ which must run with:
 1. [Pub/sub](#pubsub) 
 1. [Pipelining](#pipelining)
 1. [Scripting](#scripting)
-1. [Server]
-1. [Transactions]
+1. [Server](#server)
+1. [Transactions](#transactions)
 

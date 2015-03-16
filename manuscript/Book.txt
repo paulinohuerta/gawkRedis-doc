@@ -7,3 +7,7 @@
 07_sets.md
 08_sortedSets.md
 09_pubsub.md
+1_pipelining.md
+2_scripting.md
+3_server.md
+4_transactions.md
