@@ -6,6 +6,7 @@
 1. [expire, pexpire](#expire-pexpire) - Set a key's time to live in seconds
 1. [keys](#keysfunction) - Find all keys matching the given pattern
 1. [move](#move) - Move a key to another database
+1. [object](#object) - Allows to inspect the internals of Redis Objects 
 1. [persist](#persist) - Remove the expiration from a key
 1. [randomkey](#randomkey) - Return a random key from the keyspace
 1. [rename](#rename) - Rename a key
@@ -85,6 +86,68 @@ _**Return value**_
     redis_move(c,"x", 1)  # move to DB 1
     redis_select(c,1)	  # switch to DB 1
     redis_get(c,"x");	  # will return 42
+
+### object {#object}
+_**Description**_: allows to inspect the internals of Redis Objects associated with keys. It is useful for debugging or to understand if your keys are using the specially encoded data types to save space. Supports the sub commands: refcount, encoding and idletime.
+You can to read more about the [`object` command](http://redis.io/commands/object)
+
+_**Parameters**_   
+*number*: connection  
+*string*: sub command
+*string*: key
+
+_**Return value**_   
+`number integers` for subcommands refcount and idletime.   
+`string` for subcommand encoding.        
+`null string` if the object to inspect is missing. 
+`-1` when the subcommand is non-existent.
+
+{title="Example: Using object",lang=text,linenos=off}
+    @load "redis"
+    BEGIN {
+      c=redis_connect()
+      # print "type key students:433:",
+            # redis_type(c,"students:433")
+      # print "type key foo:",
+            # redis_type(c,"foo")
+      print "students:433 idletime:",
+             redis_object(c,"idletime","students:433")
+      print "foo idletime:",
+            redis_object(c,"idletime","foo")
+      # cob:11 can not exist
+      if((value=redis_object(c,"idletime","cob:11"))=="")
+        print "Key cob:11 non-existent"
+      else
+        print value 
+      if((value=redis_object(c,"refcount","cob:11"))=="")
+        print "Key cob:11 non-existent"
+      else
+        print value 
+      print "foo refcount:",
+            redis_object(c,"refcount","foo")
+      print "foo encoding:",
+            redis_object(c,"encoding","foo")
+      print "students:433 refcount:",
+            redis_object(c,"refcount","students:433")
+      print "students:433 encoding:",
+            redis_object(c,"encoding","students:433")
+      # "command"  is not one of the three sub commands
+      ret=redis_object(c,"command","students:433")
+      if(ret==-1)
+         print ERRNO
+      redis_close(c)
+    }
+
+{title="Output",lang=text,linenos=off}
+    students:433 idletime: 263
+    foo idletime: 263
+    Key cob:11 non-existent
+    Key cob:11 non-existent
+    foo refcount: 1
+    foo encoding: embstr
+    students:433 refcount: 1
+    students:433 encoding: ziplist
+    object need a valid command refcount|encoding|idletime
 
 ### rename {#rename}
 _**Description**_: Renames a key. If newkey already exists it is overwritten.

@@ -1,4 +1,4 @@
-# Transactions {#transactions}
+# Transactions Functions {#transactions}
 Recommended reading [Redis Transactions topic](http://redis.io/topics/transactions)
 
 * [exec](#exec) - Executes all previously queued commands in a transaction and restores the connection state to normal.

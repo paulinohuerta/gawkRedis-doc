@@ -1,4 +1,4 @@
-# Pub/sub {#pubsub}
+# Pub/sub Functions {#pubsub}
 Recommended reading about the paradigm [Pub/Sub](http://redis.io/topics/pubsub) and the implemetation
 
 * [publish](#publish) - Post a message to the given channel

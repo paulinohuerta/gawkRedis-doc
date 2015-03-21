@@ -1,4 +1,4 @@
-# Scripting {#scripting}
+# Scripting Funtions {#scripting}
 Recommended reading [Redis Lua scripting](http://redis.io/commands/eval)
 
 * [evalRedis](#evalredis) - Executes a Lua script server side

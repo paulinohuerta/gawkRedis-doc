@@ -1,4 +1,4 @@
-# Pipelining {#pipelining}
+# Pipelining Functions {#pipelining}
 Recommended reading for to know as this is supported: [Redis pipelining](http://redis.io/topics/pipelining) and [hiredis pipelining](https://github.com/redis/hiredis#pipelining), who works in a more low layer.
 
 * [pipeline](#pipeline) - To create a pipeline, allowing buffered commands

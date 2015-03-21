@@ -1,4 +1,4 @@
-# Sorted sets {#sorted-sets}
+# Sorted Sets Functions {#sorted-sets}
 
 1. [zadd](#zadd) - Adds one or more members to a sorted set or updates its score if it already exists
 1. [zcard](#zcard) - Gets the number of members in a sorted set

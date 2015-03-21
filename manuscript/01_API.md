@@ -52,10 +52,10 @@ which must run with:
 1. [Hashes](#hashes)
 1. [Lists](#lists)
 1. [Sets](#sets)
-1. [Sorted sets](#sorted-sets)
+1. [Sorted Sets](#sorted-sets)
 1. [Pub/sub](#pubsub) 
 1. [Pipelining](#pipelining)
 1. [Scripting](#scripting)
 1. [Server](#server)
 1. [Transactions](#transactions)
-
+1. [HyperLogLog](#hyperloglog)

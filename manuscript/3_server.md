@@ -1,4 +1,4 @@
-# Server {#server}
+# Server Functions {#server}
 
 * [dbsize](#dbsize) - Returns the number of keys in the currently-selected database
 * [flushdb](#flushdb) - Deletes all the keys of the currently selected DB

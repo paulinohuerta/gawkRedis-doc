@@ -1,4 +1,4 @@
-# Lists {#lists}
+# Lists Functions {#lists}
 
 1. [lindex](#lindex) - Returns the element at index index in the list.
 1. [linsertBefore](#linsertbefore) - Inserts value in a list key before the reference value pivot.
@@ -365,7 +365,7 @@ _**Return value**_
     BEGIN{
       c=redis_connect()
       redis_del(c,"mylist")
-      r=rredis_rpush(c,"mylist","Hello")
+      r=redis_rpush(c,"mylist","Hello")
       print r
       r=redis_rpush(c,"mylist","World")
       print r

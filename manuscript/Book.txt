@@ -11,3 +11,4 @@
 2_scripting.md
 3_server.md
 4_transactions.md
+5_hyperloglog.md
