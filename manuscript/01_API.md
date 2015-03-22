@@ -1,6 +1,6 @@
 # gawk-redis
 
-![gawk-redis](images/awkRedis.png){:center=""}
+![Arrows denote the functionality or mission of *gawk-redis*](images/awkRedis.png){:center=""}
 
 A [GAWK](https://www.gnu.org/software/gawk/) (the GNU implementation of the AWK Programming Language) client library for Redis.
 
