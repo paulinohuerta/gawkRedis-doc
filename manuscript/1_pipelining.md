@@ -19,19 +19,22 @@ _**Return value**_
       c=redis_connect()
       p=redis_pipeline(c)  # 'p' is a new pipeline
        # The following SET commands are buffered
-      redis_select(p,4) # changing db, using the  command select
+      redis_select(p,4) # changing db, using select
       redis_set(p,"newKey","newValue") # set command
       redis_type(p,"newKey") # type command
       redis_setrange(p,"newKey",6,"123") # setrange command
       redis_dump(p,"newKey") # dump command
       redis_keys(p,"n*",AR) # keys command
-       # To execute all commands buffered, and store the return values
-      for( ; ERRNO=="" ; RET[++i]=redis_getReply(p,REPLY) ) ;
+       # To execute all commands buffered, and store 
+       # the return values
+      for( ; ERRNO=="" ; RET[++i]=redis_getReply(p,REPLY) )
+        ;
       ERRNO=""
        # To use the value returned by 'redis_dump'
       redis_restore(c,"newKey1","0",RET[5])
-       # Actually the array REPLY stores the result the last command buffered
-       # Then, for know the result of 'redis_keys':
+       # Actually the array REPLY stores the result
+       # the last command buffered. Then, for know the
+       # result of 'redis_keys':
       for( j in REPLY ) {
         print j": "REPLY[j]
       }
@@ -59,6 +62,6 @@ _**Return value**_
     r2=redis_getReply(p,REPLY)
     print r1,r2
      # Now there are no results in the buffer, and
-     #  using 'the pipeline handle' can be reused,
-     #  no need to close the pipeline once completed their use
+     # using 'the pipeline handle' can be reused, no need
+     # to close the pipeline once completed their use
 

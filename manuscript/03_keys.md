@@ -432,7 +432,8 @@ The Redis encoded value of the key, or `string null` if the key doesn't exist
 
 {title="Example: Using dump",lang=text,linenos=off}
     redis_set(c,"foo","bar")
-    val=redis_dump(c,"foo")  # val will be the Redis encoded key value
+    val=redis_dump(c,"foo") 
+     # val will be the Redis encoded key value
 
 ### restore {#restore}
 _**Description**_: Restore a key from the result of a DUMP operation.

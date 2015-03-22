@@ -34,7 +34,9 @@ _**Return value**_
      redis_del(c,"thehash")
      redis_hset(c,"thehash","key1","hello") # returns 1
      redis_hget(c,"thehash", "key1") # returns "hello"
-     redis_hset(c,"thehash", "key1", "plop") # returns 0, value was replaced
+     redis_hset(c,"thehash", "key1", "plop") 
+      # returns 0, value was replaced
+      #
      redis_hget(c,"thehash", "key1") # returns "plop"
      redis_close(c)
     }
@@ -49,7 +51,9 @@ _**Return value**_
     redis_del(c,"thehash")
     redis_hsetnx(c,"thehash","key1","hello") # returns 1
     redis_hget(c,"thehash", "key1") # returns "hello"
-    redis_hsetnx(c,"thehash", "key1", "plop") # returns 0. No change, value wasn't replaced
+    redis_hsetnx(c,"thehash", "key1", "plop")
+     # returns 0. No change, value wasn't replaced
+     #
     redis_hget(c,"thehash", "key1") # returns "hello"
 
 ### hget {#hget}

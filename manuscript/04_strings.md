@@ -174,7 +174,9 @@ A string, the previous value located at this key
 
 {title="Example: Using getset",lang=text,linenos=off}
     redis_set(c,"x", "42")
-    exValue=redis_getset(c,"x","lol") # return "42", now the value of x is "lol"
+    exValue=redis_getset(c,"x","lol") 
+     # returns "42", now the value of x is "lol"
+     #
     newValue = redis_get(c,"x") # return "lol"
 
 ### append {#append}

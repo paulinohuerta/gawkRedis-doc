@@ -117,12 +117,15 @@ _**Return value**_
     delete A
     A[1]="zmyset1"; A[2]="zmyset2"; A[3]="zmyset3"
     redis_zinterstore(c,"zmysetInter",A)
-    # members expected in sorte set zmysetInter: 'three'
-    # with score 9
+    # expected members in the sorted set zmysetInter:
+    # 'three' with score 9
+    #
     W[1]=2; W[2]=3; W[3]=4
-    redis_zinterstore(c,"zmysetInterWeights",A,W,"aggregate sum")
+    redis_zinterstore(c, \
+            "zmysetInterWeights",A,W,"aggregate sum")
     # 'three' with score 27
-    redis_zinterstore(c, "zmysetInterWeights", A,W, "aggregate min")
+    redis_zinterstore(c, \ 
+            "zmysetInterWeights", A,W, "aggregate min")
     # 'three' with score 6
 
 ### zunionstore {#zunionstore}
@@ -250,7 +253,8 @@ _**Return value**_
       redis_zadd(c,"myzset","2","t0")
       redis_zadd(c,"myzset","5","t1")
       redis_zadd(c,"myzset","4","t9")
-      redis_zrevrangeWithScores(c,"myzset",RES,1,-1)  # returns 1
+      redis_zrevrangeWithScores(c, \
+           "myzset",RES,1,-1)  # returns 1
       for (i in RES) {
          print i": "RES[i]
       }
@@ -314,7 +318,8 @@ _**Return value**_
       redis_zadd(c,"myzset","2","one")
       redis_zadd(c,"myzset","2","two")
       redis_zadd(c,"myzset","2","three")
-      redis_zremrangebylex(c,"myzset","[g","(tkz") # returns 2
+      redis_zremrangebylex(c, \
+           "myzset","[g","(tkz") # returns 2
       redis_zrange(c,"myzset",RES,0,-1) # returns 1
       for (i in RES) {
         print i": "RES[i]
@@ -385,7 +390,8 @@ _**Return value**_
       redis_zadd(c,"myzset","5","t1")
       redis_zadd(c,"myzset","4","t9")
       redis_zremrangebyrank(c,"myzset",0,1) # returns 2
-      redis_zrangeWithScores(c,"myzset",RES,0,-1)  # returns 1
+      redis_zrangeWithScores(c, \
+           "myzset",RES,0,-1)  # returns 1
       for (i in RES) {
         print i": "RES[i]
       }
@@ -441,7 +447,7 @@ _**Parameters**_
 *string*: max  
 
 _**Return value**_   
-`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `1` on error (by example a WRONGTYPE Operation)
+`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `-1` on error (by example a WRONGTYPE Operation)
 
 {title="Example: Using zrangebyscore",lang=text,linenos=off}
     @load "redis"
@@ -580,7 +586,7 @@ _**Return value**_
     redis_zrank(c,"zmyset","three") # returns 3
     redis_zrank(c,"zmyset","one") # returns 0
 
-### zcore {#zscore}
+### zscore {#zscore}
 _**Description**_: Gets the score associated with the given member in a sorted set.
 
 _**Parameters**_    

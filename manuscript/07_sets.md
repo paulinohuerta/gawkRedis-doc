@@ -43,8 +43,10 @@ _**Return value**_
             print MEMB[i]
          }
       }
-      print "srandmember gets: "redis_srandmember(c,"myset")
-      print "Members in set 'myset', after appliying 'srandmember' function"
+      print "srandmember gets:",
+            redis_srandmember(c,"myset")
+      print "Members in set 'myset',"
+      print "after to applicate 'srandmember' function."
       delete MEMB
       r=redis_smembers(c,"myset",MEMB)
       print "smembers returns: "r
@@ -52,7 +54,8 @@ _**Return value**_
             print MEMB[i]
       }
       r=redis_srandmember(c,"myset",3,B)
-       # Members obtained using srandmember with the additional count argument
+       # Members obtained using srandmember with
+       # the additional count argument
       for( i in B) {
           print "              "B[i]
       }
@@ -66,7 +69,8 @@ _**Return value**_
     89
     c16
     srandmember gets: c16
-    Members in set 'myset', after appliying 'srandmember' function
+    Members in set 'myset',
+    after to applicate 'srandmember' function.
     smembers returns: 1
     55
     c15
@@ -100,7 +104,8 @@ _**Return value**_
          }
       }
       print "spop gets: "redis_spop(c,"myset")
-      print "Members in set 'myset', after appliying 'spop' function"
+      print "Members in set 'myset',"
+      print "after to applicate 'spop' function."
       delete MEMB
       r=redis_smembers(c,"myset",MEMB)
       print "smembers returns: "r
@@ -117,7 +122,8 @@ _**Return value**_
     c15
     c16
     spop gets: 55
-    Members in set 'myset', after appliying 'spop' function
+    Members in set 'myset',
+    after to applicate 'spop' function.
     smembers returns: 1
     89
     c15
@@ -148,7 +154,8 @@ _**Return value**_
     redis_sadd(c,"myset3",A)
     delete A
     A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
-    redis_sdiff(c,A,RE)  # members expeced in array RE: 55, c15
+    redis_sdiff(c,A,RE) 
+     # expected members in array RE: 55, c15
 
 ### sinter {#sinter}
 _**Description**_: Obtains the intersection of the given sets.
@@ -175,7 +182,8 @@ _**Return value**_
     redis_sadd(c,"myset3",A)
     delete A
     A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
-    redis_sinter(c,A,RE)  # members expeced in array RE: 89
+    redis_sinter(c,A,RE)  
+     # expected members in array RE: 89
 
 ### sunion {#sunion}
 _**Description**_: Obtains the union of the given sets.
@@ -202,7 +210,8 @@ _**Return value**_
     redis_sadd(c,"myset3",A)
     delete A
     A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
-    redis_sunion(c,A,RE)  # members expeced in array RE: 55, c15, c16, 89, 9
+    redis_sunion(c,A,RE) 
+     # expected members in array RE: 55, c15, c16, 89, 9
 
 ### sunionstore {#sunionstore}
 _**Description**_: Adds multiple sets and store the resulting set in a key.
@@ -229,7 +238,9 @@ _**Return value**_
     redis_sadd(c,"myset3",A)
     delete A
     A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
-    redis_sunionstore(c,"mysetUnion",A)  # members expeced in set mysetUnion: 55, c15, c16, 89, 9
+    redis_sunionstore(c,"mysetUnion",A)
+     # expected members in set mysetUnion:
+     # 55, c15, c16, 89, 9
 
 ### sdiffstore {#sdiffstore}
 _**Description**_: Substracts multiple sets and store the resulting set in a key.
@@ -261,10 +272,13 @@ _**Return value**_
       delete A
       A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
        # the next sdiffstore should returns 2
-      redis_sdiffstore(c,"mysetDiff",A)  # members expeced in set mysetDiff: 55,c15
+      redis_sdiffstore(c,"mysetDiff",A)
+       # expected members in set mysetDiff: 55,c15
+       #
        # for to show the results
-      ret=redis_smembers(c,"mysetDiff",MEMB) # 'ret' contains the return of 'smembers' of the resulting set 
-       # now, the array MEMB contains the results
+      ret=redis_smembers(c,"mysetDiff",MEMB) 
+       # 'ret' contains the return of 'smembers' and the
+       # array MEMB contains the results
       for(i in MEMB) {
         print MEMB[i]
       }
@@ -296,7 +310,8 @@ _**Return value**_
     redis_sadd(c,"myset3",A)
     delete A
     A[1]="myset1"; A[2]="myset2"; A[3]="myset3"
-    redis_sinterstore(c,"mysetInter",A)  # members expeced in set mysetInter: 89
+    redis_sinterstore(c,"mysetInter",A)
+     # expected members in set mysetInter: 89
 
 
 ### sscan {#sscan}
@@ -399,7 +414,8 @@ _**Return value**_
     B[1]=55; B[2]="c16"; B[3]="12"
     r2=redis_srem(c,"myset",B)
     print "r1="r1" - r2="r2
-    redis_smembers(c,"myset",MEMB)  # member expected in 'myset': c26
+    redis_smembers(c,"myset",MEMB)  
+     # expected members in 'myset': c26
 
 
 ### sismember {#sismember}
@@ -417,8 +433,8 @@ _**Return value**_
     redis_del(c,"myset")
     A[1]="55"; A[2]="c16"; A[3]="89"; A[4]="c26"; A[5]="12"
     redis_sadd(c,"myset",A)
-    redis_sismember(c,"myset","c26") # return value expected: 1
-    redis_sismember(c,"myset","66") # return value expected: 0
+    redis_sismember(c,"myset","c26") # returns 1
+    redis_sismember(c,"myset","66") # returns 0
 
 
 ### smove {#smove}
@@ -438,9 +454,11 @@ _**Return value**_
     A[1]="55"; A[2]="c16"; A[3]="89"; A[4]="c26"; A[5]="12"
     redis_sadd(c,"myset",A)
      # execute "smove" and display its return
-    print "Member 'c26' from 'myset' to 'newset': "redis_smove(c,"myset","newset","c26")
+    print "Member 'c26' from 'myset' to 'newset':",
+          redis_smove(c,"myset","newset","c26")
      # now, the expected return value is 0
-    print "Member 'ccc' from 'myset' to 'newset': "redis_smove(c,"myset","newset","ccc")
+    print "Member 'ccc' from 'myset' to 'newset':",
+          redis_smove(c,"myset","newset","ccc")
 
 ### scard {#scard}
 _**Description**_: Gets the cardinality (number of elements) of the set.

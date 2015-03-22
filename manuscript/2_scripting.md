@@ -29,7 +29,9 @@ _**Return value**_
       ARG[2]="thehash"
       ARG[3]="field3"
       ARG[4]="value3"
-      ret=redis_evalRedis(c,"return redis.call(KEYS[1],ARGV[1],ARGV[2],ARGV[3])",1,ARG,R)
+      ret=redis_evalRedis(c, \ 
+         "return redis.call( \
+         KEYS[1],ARGV[1],ARGV[2],ARGV[3])",1,ARG,R)
       print "Function 'evalRedis' returns: "ret
       print "Elements in arrray of results: "length(R)
       print redis_hget(c,"thehash","field3")
@@ -59,12 +61,15 @@ _**Return value**_
     BEGIN{
       c=redis_connect()
        #  'script load' returns SHA1 digest if success
-      A[1]=redis_script(c,"load","return {1,2,{7,'Hello World!',89}}")
-      A[2]=redis_script(c,"load","return redis.call('set','foo','bar')")
-      A[3]=redis_script(c,"load","return redis.call(KEYS[1],ARGV[1])")
+      A[1]=redis_script(c, \
+            "load","return {1,2,{7,'Hello World!',89}}")
+      A[2]=redis_script(c, \
+            "load","return redis.call('set','foo','bar')")
+      A[3]=redis_script(c, \ 
+            "load","return redis.call(KEYS[1],ARGV[1])")
       ret=redis_script(c,"exists",A,R)
-      print "Obtain information of existence for these",
-            "three scripts whose keys are:"
+      print "Obtain information of existence for these"
+      print "three scripts whose keys are:"
       for(i in A) {
        print A[i]
       }
@@ -77,7 +82,8 @@ _**Return value**_
     }
 
 {title="Output",lang=text,linenos=off}
-    Obtain information of existence for these three scripts whose keys are:
+    Obtain information of existence for these
+    three scripts whose keys are:
     4647a689ee8af8debe9fd50a6fb9fee93ef92e43
     2fa2b029f72572e803ff55a09b1282699aecae6a
     24598a5b88e25cb396a4de4afbd1f5509c537396
@@ -101,7 +107,8 @@ _**Return value**_
 
 {title="Example: Using script load",lang=text,linenos=off}
     c=redis_connect()
-    k1=redis_script(c,"load","return redis.call('set','foo','bar')")
+    k1=redis_script(c, \
+        "load","return redis.call('set','foo','bar')")
      # 'k1' stores the SHA1 digest
 
 ### script kill {#script-kill}
@@ -152,9 +159,12 @@ _**Return value**_
     BEGIN{
       c=redis_connect()
        #  loading into the scripts cache
-      cmd1=redis_script(c,"load","return {1,2,{7,'Hello World!',89}}")
-      cmd2=redis_script(c,"load","return redis.call('set','foo','bar')")
-      cmd3=redis_script(c,"load","return redis.call(KEYS[1],ARGV[1])")
+      cmd1=redis_script(c, \
+            "load","return {1,2,{7,'Hello World!',89}}")
+      cmd2=redis_script(c, \
+            "load","return redis.call('set','foo','bar')")
+      cmd3=redis_script(c, \ 
+            "load","return redis.call(KEYS[1],ARGV[1])")
        #  executing the scripts
       print "Returns cmd1:",
             redis_evalsha(c,cmd1,0,ARG,R)
