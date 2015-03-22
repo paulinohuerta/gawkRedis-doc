@@ -416,7 +416,7 @@ _**Parameters**_
 *string*: max  
 
 _**Return value**_   
-`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `1` on error (by example a WRONGTYPE Operation)
+`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `-1` on error (by example a WRONGTYPE Operation)
 
 {title="Example: Using zrangebylex",lang=text,linenos=off}
     c=redis_connect()
@@ -484,7 +484,7 @@ _**Parameters**_
 *string*: min  
 
 _**Return value**_   
-`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `1` on error (by example a WRONGTYPE Operation)
+`1` when obtains results,`0` when list empty (no elements in the score range) or the key name no exists, `-1` on error (by example a WRONGTYPE Operation)
 
 {title="Example: Using zrevrangebyscore",lang=text,linenos=off}
     @load "redis"
@@ -555,7 +555,7 @@ _**Parameters**_
 *string or array*: the member (a string) or the set of members that containing the array 
 
 _**Return value**_   
-*number*: The number of members removed from the sorted set, `-1`on error.
+*number*: The number of members removed from the sorted set, `-1` on error.
 
 {title="Example: Using zrem",lang=text,linenos=off}
     redis_del(c,"zmyset")
@@ -575,7 +575,7 @@ _**Parameters**_
 *string*: the member
 
 _**Return value**_   
-`the rank of member`, if the member exists in the key. `string null`, if the member does not exist in the key or the key does not exist, `-1`on error.
+`the rank of member`, if the member exists in the key. `string null`, if the member does not exist in the key or the key does not exist, `-1` on error.
 
 {title="Example: Using zrank",lang=text,linenos=off}
     redis_del(c,"zmyset")
@@ -595,7 +595,7 @@ _**Parameters**_
 *string*: the member
 
 _**Return value**_   
-`the score of member represented as string`, if the member exists in the key. `string null`, if the member does not exist in the key or the key does not exist. `-1`on error.
+`the score of member represented as string`, if the member exists in the key. `string null`, if the member does not exist in the key or the key does not exist. `-1` on error.
 
 {title="Example: Using zscore",lang=text,linenos=off}
     redis_del(c,"zmyset")
