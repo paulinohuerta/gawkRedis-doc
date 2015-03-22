@@ -9,8 +9,8 @@ Recommended reading [Redis HyperLogLog](http://redis.io/commands/pfadd)
 _**Description**_: Adds elements to the HyperLogLog data structure stored at the key specified.
 
 _**Parameters**_   
-*number*: connection
-*string*: key name
+*number*: connection    
+*string*: key name    
 *string or array*: a element or an array containing the elements
 
 _**Return value**_    
@@ -31,8 +31,8 @@ _**Return value**_
 _**Description**_: Returns the approximated cardinality computed by the HyperLogLog data structure stored at the specified key.
 
 _**Parameters**_   
-*number*: connection
-*string or array*: a key name or an array containing the key names
+*number*: connection    
+*string or array*: a key name or an array containing the key names    
 
 _**Return value**_    
 *number*: The approximated number of unique elements observed via PFADD. `0` if the key does not exist.
@@ -68,8 +68,8 @@ _**Return value**_
 _**Description**_: Merge multiple HyperLogLog keys into an unique key that will approximate the cardinality of the union of the observed Sets of the source HyperLogLog structures.
 
 _**Parameters**_    
-*number*: connection
-*string*: a destination key name
+*number*: connection    
+*string*: a destination key name    
 *string or array*: a source key name or an array containing the source key names
 
 _**Return value**_    
