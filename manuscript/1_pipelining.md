@@ -3,6 +3,8 @@ Recommended reading for to know as this is supported: [Redis pipelining](http://
 
 * [pipeline](#pipeline) - To create a pipeline, allowing buffered commands
 * [getReply](#getreply) - To get or receive the result of each command buffered
+* [getReplyInfo](#getreplyinfo) - To get the result when the `info` command is the command buffered
+* [getReplyMass](#getreplymass) - To perform a massive insertion data
 
 ### pipeline {#pipeline}
 _**Description**_:  To create a pipeline, allowing buffered commands.
@@ -41,6 +43,29 @@ _**Return value**_
       redis_close(c)
     }
 
+### getReplyInfo {#getreplyinfo}
+_**Description**_:  This function is exactly like `getReply` with the only difference that has been designed for replies of the `info` command.
+
+_**Parameters**_
+*number*: pipeline handle
+*array*: for results of the `info` command
+
+_**Return value**_
+*string or number*:  allways `1` or `-1` on error (if not exist results buffered)
+
+{title="Example: Using getReplyInfo",lang=text,linenos=off}
+    @load "redis"
+    BEGIN{
+     c=redis_connect()
+     p=redis_pipeline(c)
+     print redis_info(p,AR,"clients")
+     print redis_getReplyInfo(p,AR)
+     for(i in AR) {
+       print i" ==> "AR[i]
+     }
+     redis_close(c)
+    }
+
 ### getReply {#getreply}
 _**Description**_: To receive the replies, the first time sends all buffered commands to the server, then subsequent calls get replies for each command.
 
@@ -64,4 +89,29 @@ _**Return value**_
      # Now there are no results in the buffer, and
      # using 'the pipeline handle' can be reused, no need
      # to close the pipeline once completed their use
+
+### getReplyMass {#getreplymass}
+_**Description**_: This function was designed in order to perform mass insertion
+
+_**Parameters**_
+*number*: pipeline handle
+
+_**Return value**_
+*number*: the replies received from server or `-1` on error (if not exist results buffered)
+
+{title="Example: Using getReplyMass",lang=text,linenos=off}
+    BEGIN {
+     FS = ","
+     c=redis_connect()
+     p=redis_pipeline(c)
+    }
+    {
+      redis_set(p,$1,$2)
+    }
+    END {
+  r=redis_getReplyMass(p) # "r" contains how many data was transferred
+    }
+
+    # one-liner script
+    # gawk -lredis -F, 'BEGIN{c=redis_connect();p=redis_pipeline(c)}{redis_set(p,$1,$2)}END{redis_getReplyMass(p)}' file.csv
 

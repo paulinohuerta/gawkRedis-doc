@@ -29,6 +29,7 @@ _**Description**_: Subscribe to channels.
 _**Parameters**_   
 *number*: connection  
 *string or array*: the channel name or the array containing the names of channels  
+*array(three elements)*: contains the strings returned: "message", the `channel name` and "1"   
 
 _**Return value**_   
 `1` on success, `-1` on error
@@ -36,6 +37,8 @@ _**Return value**_
 {title="Example: Using subscribe",lang=text,linenos=off}
     redis_subscribe(c,"chan-2")  # returns 1,
     # subscribes to chan-2
+    # array RET will contain "message",
+    # "chan-2", "1"
     #
     CH[1]="chan-1"
     CH[2]="chan-2"
@@ -69,6 +72,7 @@ _**Description**_: Unsubscribes the client from the given patterns, or from all 
 _**Parameters**_   
 *number*: connection  
 *string or array (This parameter could not be )*: the pattern or the array containing the patterns.   
+
 _**Return value**_   
 `1` on success, `-1` on error
 
@@ -100,6 +104,7 @@ _**Description**_: Subscribes the client to the given patterns. Supported glob-s
 _**Parameters**_   
 *number*: connection  
 *string or array*: the pattern, or the array containing the patterns.
+*array(three elements)*: contains the strings returned: "pmessage", the `channel name` and "1"   
 
 _**Return value**_   
 `1` on success, `-1` on error
@@ -118,12 +123,12 @@ _**Description**_: Gets a message from any of the subscribed channels, (based at
 
 _**Parameters**_   
 *number*: connection  
-*array*: containing the messages received  
+*array(three or four elements)*: containing the messages received. When the subscription is by `subscribe` the strings are "message", `channel name` and `message`. While with subscription realized by `psubscribe` the strings are "pmessage", the `pattern channel name`, the `channel name` and `message`.
 
 _**Return value**_   
 `1` on success, `-1` on error
 
-{title="Example: Using getMessage",lang=text,linenos=off}
+{title="Example mple: Using getMessage",lang=text,linenos=off}
     A[1]="c1"
     A[2]="c2"
     ret=redis_subscribe(c,A)

@@ -9,7 +9,7 @@
 1. [sismember](#sismember) - Determines if a given value is a member of a set
 1. [smembers](#smembers) - Gets all the members in a set
 1. [smove](#smove) - Moves a member from one set to another
-1. [spop](#spop) - Removes and returns a random member from a set
+1. [spop](#spop) - Removes and returns one or more random members from a set
 1. [sscan](#sscan) - Iterates elements of Sets types
 1. [srandmember](#srandmember) - Gets one or multiple random members from a set
 1. [srem](#srem) - Removes one or more members from a set

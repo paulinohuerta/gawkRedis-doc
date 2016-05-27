@@ -12,3 +12,5 @@
 3_server.md
 4_transactions.md
 5_hyperloglog.md
+6_geolocation.md
+

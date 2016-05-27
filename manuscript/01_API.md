@@ -59,3 +59,4 @@ which must run with:
 1. [Server](#server)
 1. [Transactions](#transactions)
 1. [HyperLogLog](#hyperloglog)
+1. [Geolocation](#geolocation)
