@@ -109,9 +109,12 @@ _**Return value**_
       redis_set(p,$1,$2)
     }
     END {
-  r=redis_getReplyMass(p) # "r" contains how many data was transferred
+      r=redis_getReplyMass(p) # "r" contains 
+        #how many data was transferred
     }
 
     # one-liner script
-    # gawk -lredis -F, 'BEGIN{c=redis_connect();p=redis_pipeline(c)}{redis_set(p,$1,$2)}END{redis_getReplyMass(p)}' file.csv
+    gawk -lredis -F, 'BEGIN{c=redis_connect(); \
+      p=redis_pipeline(c)}{redis_set(p,$1,$2)} \
+      END{redis_getReplyMass(p)}' file.csv
 
