@@ -2,18 +2,18 @@
 Recommended reading [Redis Geolocation](http://redis.io/commands/geoadd).   
 Geospatial data (latitude, longitude, name) are stored into a key as a sorted set, in a way that makes it possible to later retrieve items using a query by radius or member.
 
-* [geoadd](#geoadd) - Adds the specified geospatial items to one specified key.
-* [geodist](#geodist) - Obtains the distance between two members with information geospatial.
-* [georadius](#georadius) - Obtains the members with geospatial information which are within the borders of the area specified with the center and the maximum distance from the center.
-* [georadiusWD](#georadiuswd) - This is like `georadius`, adding `distance` to the results.
-* [georadiusWC](#georadiuswc) - This is like `georadius`, adding coordinates (longitude and latitude) to the results.
-* [georadiusWDWC](#georadiuswdwc) - This is like `georadius`, adding distance and coordinates to the results.
-* [geohash](#geohash) - Returns members of a geospatial index as standard geohash strings.
-* [geopos](#geopos) - Returns longitude and latitude of members of a geospatial index.
-* [georadiusbymember](#georadiusbymember) - This is like `georadius` with the same results. It takes the name of a member existing in a geospatial index
-* [georadiusbymemberWD](#georadiusbymemberwd) - This is like `georadiusbymember`, adding `distance` to the results.
-* [georadiusbymemberWC](#georadiusbymemberwc) - This is like `georadiusbymember`, adding coordinates (longitude and latitude) to the results.
-* [georadiusbymemberWDWC](#georadiusbymemberwdwc) - This is like `georadiusbymember`, adding distance and coordinates to the results.
+1. [geoadd](#geoadd) - Adds the specified geospatial items to one specified key.
+1. [geodist](#geodist) - Obtains the distance between two members with information geospatial.
+1. [geohash](#geohash) - Returns members of a geospatial index as standard geohash strings.
+1. [geopos](#geopos) - Returns longitude and latitude of members of a geospatial index.
+1. [georadius](#georadius) - Obtains the members with geospatial information which are within the borders of the area specified with the center and the maximum distance from the center.
+1. [georadiusWD](#georadiuswd) - This is like `georadius`, adding `distance` to the results.
+1. [georadiusWC](#georadiuswc) - This is like `georadius`, adding coordinates (longitude and latitude) to the results.
+1. [georadiusWDWC](#georadiuswdwc) - This is like `georadius`, adding distance and coordinates to the results.
+1. [georadiusbymember](#georadiusbymember) - This is like `georadius` with the same results. It takes the name of a member existing in a geospatial index
+1. [georadiusbymemberWD](#georadiusbymemberwd) - This is like `georadiusbymember`, adding `distance` to the results.
+1. [georadiusbymemberWC](#georadiusbymemberwc) - This is like `georadiusbymember`, adding coordinates (longitude and latitude) to the results.
+1. [georadiusbymemberWDWC](#georadiusbymemberwdwc) - This is like `georadiusbymember`, adding distance and coordinates to the results.
 
 
 ### geoadd {#geoadd}
@@ -27,7 +27,7 @@ _**Parameters**_
 _**Return value**_
 *number*: the number of elements added to the sorted set, not including elements already existing for which the score was updated.
 
-{title="Example: Using geadd",lang=text,linenos=off}
+{title="Example: Using geoadd",lang=text,linenos=off,size=0.5}
     @load "redis"
     BEGIN {
       c=redis_connect()

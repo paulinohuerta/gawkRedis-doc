@@ -17,7 +17,7 @@
 1. [zremrangebyscore](#zremrangebyscore) - Removes all elements in the sorted set with a score into a specified range
 1. [zrevrange](#zrevrange) - Returns a specified range of elements in the sorted set. The elements are sorted from highest to lowest score
 1. [zrevrangebyscore](#zrevrangebyscore) - Returns all the elements in the sorted set with a score between max and min. 
-1. [zrevrangeWhithScores](#zrevrangewithscores) - Executes zrevrange with the option 'withscores', gettings the scores together with the elements
+1. [zrevrangeWithScores](#zrevrangewithscores) - Executes zrevrange with the option 'withscores', gettings the scores together with the elements
 1. [zrevrank](#zrevrank) - Returns the rank of a member in the sorted set, with the scores ordered from high to low
 1. [zscan](#zscan) - Iterates elements of Sorted Set types
 1. [zscore](#zscore) - Gets the score associated with the given member in a sorted set
