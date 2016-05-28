@@ -27,7 +27,7 @@ _**Parameters**_
 _**Return value**_
 *number*: the number of elements added to the sorted set, not including elements already existing for which the score was updated.
 
-{title="Example: Using geoadd",lang=text,linenos=off,size=0.5}
+{title="Example: Using geoadd",lang=awk,linenos=off}
     @load "redis"
     BEGIN {
       c=redis_connect()
