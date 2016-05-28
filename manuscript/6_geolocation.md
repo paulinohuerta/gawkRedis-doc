@@ -37,15 +37,20 @@ _**Return value**_
       A[4]="-74.0059700"
       A[5]="40.7142700"
       A[6]="nyc"
-      redis_geoadd(c,"US",A) # returns 2, are two items added to a zset
-      print "la-nyc kms: "redis_geodist(c,"US","la","nyc","km")
-      print "la-nyc miles: "redis_geodist(c,"US","la","nyc","mi")
+      redis_geoadd(c,"US",A) 
+       # returns 2, are two items added to a zset
+      print "la-nyc kms:"
+      redis_geodist(c,"US","la","nyc", "km")
+      print "la-nyc miles:"
+      redis_geodist(c,"US","la","nyc","mi")
       redis_close(c)
     }
 
 {title="Output",lang=text,linenos=off}
-    la-nyc kms: 3936.8457102104558
-    la-nyc miles: 2446.248592721523
+    la-nyc kms:
+    3936.8457102104558
+    la-nyc miles:
+    2446.248592721523
 
 ### geodist {#geodist}
 _**Description**_: Returns the distance between two members in the geospatial index represented by the sorted set.
@@ -177,13 +182,20 @@ _**Return value**_
       A[9]="Trapani"
       c=redis_connect()
       redis_geoadd(c,"sicilia",A)
-      print redis_geodist(c,"sicilia","Catania","Trapani","km")
+      print redis_geodist(c,"sicilia","Catania","Trapani",
+      "km")
       redis_georadius(c,"sicilia",AR,15,37,200,"km")
         # georadius using optionals argumments
-        # redis_georadius(c,"sicilia",AR,15,37,200,"km",1)  # using count
-        # redis_georadius(c,"sicilia",AR,15,37,200,"km","desc", 1)  # order and count
-        # redis_georadius(c,"sicilia",AR,15,37,200,"km","desc")  # only order
-      dumparray(AR,"NN") # function defined in the geopos example
+          # using count
+        # redis_georadius(c,"sicilia",AR,15,37,200,"km",1) 
+          # using order and count
+        # redis_georadius(c,"sicilia",AR,15,37,200,"km",
+        # "desc", 1)
+          # only order
+        # redis_georadius(c,"sicilia",AR,15,37,200,"km",
+        # "desc") 
+      dumparray(AR,"NN") # function defined in the
+                         # geopos example
       redis_close(c)
     }
 
@@ -197,7 +209,7 @@ _**Return value**_
     NN["3"]["1"] = 15.087267458438873
     NN["3"]["2"] = 37.502668423331613
 
-## georadiusWD {#georadiuswd}
+### georadiusWD {#georadiuswd}
 _**Description**_: This is like `georadius`, adding `distance` to the results.
 
 _**Parameters**_
@@ -227,14 +239,16 @@ _**Return value**_
       for(i in AR) {
         print i") "AR[i]
       }
-      print "georadiusWD radius 2500 output in km desc order "
+      print"georadiusWD radius 2500 output in km desc order"
       delete(AR)
-      redis_georadiusWD(c,"sisu",AR,"14",37.9,2500,"km","desc") # returns 1
-      dumparray(AR,"NN") # function defined in the geopos example
+      redis_georadiusWD(c,"sisu",AR,"14",37.9,2500,"km",
+      "desc") # returns 1
+      dumparray(AR,"NN") # function defined in the 
+                         # geopos example
       redis_close(c)
     }
 
-## georadiusWC {#georadiuswc}
+### georadiusWC {#georadiuswc}
 _**Description**_: This is like `georadius`, adding `coordinates` to the results.
 
 _**Parameters**_
@@ -255,14 +269,16 @@ _**Return value**_
     @load "redis"
     BEGIN {
       c=redis_connect()
-      print "georadiusWC radius 2500 output in km desc order "
+      print"georadiusWC radius 2500 output in km desc order"
       delete(AR)
-      redis_georadiusWC(c,"sisu",AR,"14",37.9,2500,"km","desc") # returns 1
-      dumparray(AR,"NN")  # function defined in the geopos example
+      redis_georadiusWC(c,"sisu",AR,"14",37.9,2500,"km",
+      "desc") # returns 1
+      dumparray(AR,"NN")  # function defined in the
+                          # geopos example
       redis_close(c)
     }
 
-## georadiusWDWC {#georadiuswdwc}
+### georadiusWDWC {#georadiuswdwc}
 _**Description**_: This is like `georadius`, adding `distance` and `coordinates` to the results.
 
 _**Parameters**_
@@ -283,10 +299,12 @@ _**Return value**_
     @load "redis"
     BEGIN {
       c=redis_connect()
-      print "georadiusWDWC radius 2500 output in km desc order "
+      print "georadiusWDWC radius 2500 output in km desc"
       delete(AR)
-      redis_georadiusWDWC(c,"sisu",AR,"14",37.9,2500,"km","desc") # returns 1
-      dumparray(AR,"NN")  # function defined in the geopos example
+      redis_georadiusWDWC(c,"sisu",AR,"14",37.9,2500,"km",
+      "desc") # returns 1
+      dumparray(AR,"NN")  # function defined in the
+                          #  geopos example
       redis_close(c)
     }
 
@@ -313,11 +331,13 @@ _**Return value**_
         print i") "RES[i]
       }
       print ""
-      redis_georadiusbymember(c,"sisu",AR,"Ecija",350,"km") # returns 1
+      redis_georadiusbymember(c,"sisu",AR,"Ecija",350,
+      "km") # returns 1
       dumparray(AR,"NN")
       delete AR
       print ""
-      redis_georadiusbymember(c,"sisu",AR,"Ecija",2800,"km") # returns 1
+      redis_georadiusbymember(c,"sisu",AR,"Ecija",2800,
+      "km") # returns 1
       redis_close(c)
       dumparray(AR,"NN")
     }
@@ -340,7 +360,7 @@ _**Return value**_
     NN["3"] = Palermo
     NN["4"] = Catania
     
-## georadiusbymemberWD {#georadiusbymemberwd}
+### georadiusbymemberWD {#georadiusbymemberwd}
 _**Description**_: Returns the members of a sorted set populated with geospatial information using `geoadd`, adding `distance` to the results.
 
 _**Parameters**_
@@ -358,7 +378,8 @@ _**Return value**_
     @load "redis"
     BEGIN {
      c=redis_connect() 
-     redis_georadiusbymemberWD(c,"sisu",AR,"Ecija",2800,"km")
+     redis_georadiusbymemberWD(c,"sisu",AR,"Ecija",2800,
+     "km")
      redis_close(c)
      dumparray(AR,"NN")
     }
@@ -373,7 +394,7 @@ _**Return value**_
     NN["4"]["1"] = Catania
     NN["4"]["2"] = 1775.8787
 
-## georadiusbymemberWC {#georadiusbymemberwc}
+### georadiusbymemberWC {#georadiusbymemberwc}
 _**Description**_: Returns the members of a sorted set populated with geospatial information using `geoadd`, adding `coordinates` to the results.
 
 _**Parameters**_
@@ -391,7 +412,8 @@ _**Return value**_
     @load "redis"
     BEGIN {
      c=redis_connect()
-     redis_georadiusbymemberWC(c,"sisu",AR,"Ecija",2800,"km")
+     redis_georadiusbymemberWC(c,"sisu",AR,"Ecija",2800,
+     "km")
      redis_close(c)
      dumparray(AR,"NN")
     }
@@ -410,7 +432,7 @@ _**Return value**_
     NN["4"]["2"]["1"] = 15.087267458438873
     NN["4"]["2"]["2"] = 37.502668423331613
        
-## georadiusbymemberWDWC {#georadiusbymemberwdwc}
+### georadiusbymemberWDWC {#georadiusbymemberwdwc}
 _**Description**_: Returns the members of a sorted set populated with geospatial information using `geoadd`, adding `distances` and `coordinates` to the results.
 
 _**Parameters**_
@@ -428,7 +450,8 @@ _**Return value**_
     @load "redis"
     BEGIN {
      c=redis_connect() 
-     redis_georadiusbymemberWDWC(c,"sisu",AR,"Ecija",2800,"km")
+     redis_georadiusbymemberWDWC(c,"sisu",AR,"Ecija",2800,
+     "km")
      redis_close(c)
      dumparray(AR,"NN")
     }
