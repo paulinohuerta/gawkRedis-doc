@@ -27,7 +27,7 @@ _**Parameters**_
 _**Return value**_
 *number*: the number of elements added to the sorted set, not including elements already existing for which the score was updated.
 
-{title="Example: Using geoadd",lang=awk,linenos=off}
+{title="Example: Using geoadd",lang=text,linenos=off}
     @load "redis"
     BEGIN {
       c=redis_connect()
@@ -43,8 +43,7 @@ _**Return value**_
       redis_close(c)
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     la-nyc kms: 3936.8457102104558
     la-nyc miles: 2446.248592721523
 
@@ -69,8 +68,82 @@ _**Return value**_
       redis_close(c)
     }
 
-Output:
+{title="Output",lang=text,linenos=off}
+    3936845.7102104556
 
+### geohash {#geohash}
+_**Description**_: Returns members of a geospatial index as standard geohash strings.
+
+_**Parameters**_
+*number*: connection  
+*string*: key name  
+*array*: it contains the names of members   
+*array*: will contain the results. Each element is the Geohash corresponding to each member name passed as argument
+
+_**Return value**_
+`1` on success. `0` if not exists the key. `-1` on error.
+
+{title="Example: Using geohash",lang=text,linenos=off}
+    @load "redis"
+    BEGIN {
+      A[1]="Trapani"
+      A[2]="Catania"
+      c=redis_connect()
+      redis_geohash(c,"sicilia",A,RESP)
+      for(i=1; i<=2; i++) {
+        print i") "RESP[i]
+      }
+      redis_close(c)
+    }
+
+{title="Output",lang=text,linenos=off}
+    1) sqbbm2ck9f0
+    2) sqdtr74hyu0
+
+### geopos {#geopos}
+_**Description**_: Returns longitude and latitude of members of a geospatial index.
+
+_**Parameters**_
+*number*: connection   
+*string*: key name   
+*array*: it contains the names of members   
+*array*: will contain the results where each element is a two elements array representing longitude and latitude (x,y) of each member name passed as argument.  Non existing elements are reported as NULL elements of the array.
+
+_**Return value**_
+`1` on success. `0` if not exists the key. `-1` on error.
+
+{title="Example: Using geopos",lang=text,linenos=off}
+    @load "redis"
+    BEGIN {
+      c=redis_connect() 
+      B[1]="Trapani"; B[2]="Catanzaro"; B[3]="Catania"
+      redis_geopos(c,"sicilia",B,AR) # returns 1
+      redis_close(c)  
+      if(length(AR)>0) {
+         dumparray(AR,"NN")
+      }
+    }
+
+    function dumparray(array,e, i) {
+      for (i in array){
+        if (isarray(array[i])){
+          dumparray(array[i],e "[\"" i "\"]")
+        }
+        else {
+            printf("%s[\"%s\"] = %s\n",e,i, array[i])
+        }
+      }
+    }
+
+{title="Output",lang=text,linenos=off}
+    @load "redis"
+    BEGIN {
+      c=redis_connect()
+      print redis_geodist(c,"US","la","nyc","m")
+      redis_close(c)
+    }
+
+{title="Output",lang=text,linenos=off}
     3936845.7102104556
 
 ### georadius {#georadius}
@@ -114,78 +187,10 @@ _**Return value**_
       redis_close(c)
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     231.42622077769485
     1) Palermo
     2) Catania
-
-### geohash {#geohash}
-_**Description**_: Returns members of a geospatial index as standard geohash strings.
-
-_**Parameters**_
-*number*: connection  
-*string*: key name  
-*array*: it contains the names of members   
-*array*: will contain the results. Each element is the Geohash corresponding to each member name passed as argument
-
-_**Return value**_
-`1` on success. `0` if not exists the key. `-1` on error.
-
-{title="Example: Using geohash",lang=text,linenos=off}
-    @load "redis"
-    BEGIN {
-      A[1]="Trapani"
-      A[2]="Catania"
-      c=redis_connect()
-      redis_geohash(c,"sicilia",A,RESP)
-      for(i=1; i<=2; i++) {
-        print i") "RESP[i]
-      }
-      redis_close(c)
-    }
-
-Output:
-
-    1) sqbbm2ck9f0
-    2) sqdtr74hyu0
-
-### geopos {#geopos}
-_**Description**_: Returns longitude and latitude of members of a geospatial index.
-
-_**Parameters**_
-*number*: connection   
-*string*: key name   
-*array*: it contains the names of members   
-*array*: will contain the results where each element is a two elements array representing longitude and latitude (x,y) of each member name passed as argument.  Non existing elements are reported as NULL elements of the array.
-
-_**Return value**_
-`1` on success. `0` if not exists the key. `-1` on error.
-
-{title="Example: Using geopos",lang=text,linenos=off}
-    @load "redis"
-    BEGIN {
-      c=redis_connect() 
-      B[1]="Trapani"; B[2]="Catanzaro"; B[3]="Catania"
-      redis_geopos(c,"sicilia",B,AR) # returns 1
-      redis_close(c)  
-      if(length(AR)>0) {
-         dumparray(AR,"NN")
-      }
-    }
-
-    function dumparray(array,e, i) {
-      for (i in array){
-        if (isarray(array[i])){
-          dumparray(array[i],e "[\"" i "\"]")
-        }
-        else {
-            printf("%s[\"%s\"] = %s\n",e,i, array[i])
-        }
-      }
-    }
-
-Output:
 
     NN["1"]["1"] = 12.537200152873993
     NN["1"]["2"] = 38.017599561572482
@@ -285,7 +290,7 @@ _**Return value**_
       redis_close(c)
     }
 
-## georadiusbymember {#georadiusbymember}
+### georadiusbymember {#georadiusbymember}
 _**Description**_: This command is exactly like `georadius`. The difference is that instead of to take a longitude and latitude as the center of the area, it takes the name of a member already existing inside the geospatial index.
 
 _**Parameters**_
@@ -317,8 +322,7 @@ _**Return value**_
       dumparray(AR,"NN")
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     1) Sevilla
     2) 1966655518805908
     3) Ecija
@@ -336,7 +340,7 @@ Output:
     NN["3"] = Palermo
     NN["4"] = Catania
     
-## georadiusbymemberWD {#georadiusmemberwd}
+## georadiusbymemberWD {#georadiusbymemberwd}
 _**Description**_: Returns the members of a sorted set populated with geospatial information using `geoadd`, adding `distance` to the results.
 
 _**Parameters**_
@@ -359,8 +363,7 @@ _**Return value**_
      dumparray(AR,"NN")
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     NN["1"]["1"] = Sevilla
     NN["1"]["2"] = 81.3977
     NN["2"]["1"] = Ecija
@@ -393,8 +396,7 @@ _**Return value**_
      dumparray(AR,"NN")
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     NN["1"]["1"] = Sevilla
     NN["1"]["2"]["1"] = -5.9844991564750671
     NN["1"]["2"]["2"] = 37.389100241787432
@@ -431,8 +433,7 @@ _**Return value**_
      dumparray(AR,"NN")
     }
 
-Output:
-
+{title="Output",lang=text,linenos=off}
     NN["1"]["1"] = Sevilla
     NN["1"]["2"] = 81.3977
     NN["1"]["3"]["1"] = -5.9844991564750671
